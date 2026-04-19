@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaskey Consulting: Fractional Chief of Staff for Families</title>
+  <meta name="description" content="A fractional Chief of Staff for busy, high-achieving families. Life admin managed proactively so nothing falls through the cracks." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Color tokens ───────────────────────────────────────────── */
+    :root {
+      --cream:    #F5F1EB;
+      --linen:    #EAE3D6;
+      --charcoal: #2B2B2B;
+      --espresso: #452F1E;
+      --chestnut: #8B5E3C;
+      --forest:   #3C4A40;
+      --gold:     #C0A97A;
+      --taupe:    #9C8E7B;
+
+      --sp-xs:  0.5rem;
+      --sp-sm:  1rem;
+      --sp-md:  2rem;
+      --sp-lg:  4rem;
+      --sp-xl:  6rem;
+    }
+
+    /* ── Reset ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'Figtree', sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ──────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 900;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+    }
+
+    /* ── Typography helpers ─────────────────────────────────────── */
+    .label {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.6875rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      display: block;
+    }
+
+    /* ── Scroll reveal ──────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible        { opacity: 1; transform: translateY(0); }
+    .reveal-d1             { transition-delay: 0.09s; }
+    .reveal-d2             { transition-delay: 0.2s; }
+    .reveal-d3             { transition-delay: 0.33s; }
+    .reveal-d4             { transition-delay: 0.46s; }
+    .reveal-d5             { transition-delay: 0.6s; }
+
+    /* ── Layout ─────────────────────────────────────────────────── */
+    .container        { max-width: 1160px; margin: 0 auto; padding: 0 2.5rem; }
+    .container-narrow { max-width: 800px;  margin: 0 auto; padding: 0 2.5rem; }
+
+    /* ══════════════════════════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════════════════════════ */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      padding: 1.375rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--forest);
+      transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav.scrolled { padding: 0.9rem 2.5rem; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo img { height: 30px; width: auto; display: block; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      font-weight: 400;
+      color: rgba(245,241,235,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover        { color: var(--cream); }
+    .nav-links a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    .nav-cta {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.6875rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--forest);
+      background: var(--cream);
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      border: 1px solid var(--cream);
+      transition: background 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                  color 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-cta:hover        { background: transparent; color: var(--cream); }
+    .nav-cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .nav-cta:active       { background: rgba(245,241,235,0.85); }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--cream);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       HERO — TYPEWRITER
+    ══════════════════════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cream top — typewriter only */
+    .hero-top {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cream);
+      padding: 7rem 2rem 3.5rem;
+    }
+
+    /* Forest bottom — Kaskey intro */
+    .hero-bottom {
+      background: var(--forest);
+      display: flex;
+      justify-content: center;
+      padding: 3rem 2rem 4.5rem;
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .hero-stem {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--taupe);
+      text-align: center;
+    }
+
+    .hero-typed-line {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.75rem, 6vw, 5.5rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--espresso);
+      min-height: 2.8em;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero-cursor {
+      display: inline-block;
+      color: var(--espresso);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.75rem, 6vw, 5.5rem);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-left: 2px;
+      animation: cursor-blink 0.9s step-start infinite;
+    }
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .hero-divider {
+      width: 60px;
+      height: 1px;
+      background: rgba(192,169,122,0.35);
+      margin: 0 auto 2rem;
+      flex-shrink: 0;
+    }
+
+    .hero-brand-name {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: rgba(245,241,235,0.5);
+      text-align: center;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      color: #ffffff;
+      margin-top: 0.625rem;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      text-align: center;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-supporting {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+      color: rgba(245,241,235,0.65);
+      max-width: 520px;
+      line-height: 1.75;
+      margin: 1rem auto 0;
+      text-align: center;
+    }
+
+    .hero-cta-wrap {
+      margin-top: 2.5rem;
+    }
+
+    .hero-cta-wrap .btn-primary {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 1rem 2.75rem;
+    }
+    .hero-cta-wrap .btn-primary:hover  { background: var(--gold); color: var(--forest); }
+    .hero-cta-wrap .btn-primary:active { background: #a8905f; border-color: #a8905f; color: var(--forest); }
+
+    /* Scroll indicator */
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--gold);
+      opacity: 0.4;
+      transform-origin: top center;
+      animation: scroll-line 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes scroll-line {
+      0%   { transform: scaleY(0); opacity: 0; }
+      30%  { opacity: 0.4; }
+      100% { transform: scaleY(1); opacity: 0; }
+    }
+
+    .btn-primary {
+      display: inline-block;
+      align-self: flex-start;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--forest);
+      background: var(--gold);
+      text-decoration: none;
+      padding: 0.875rem 2.125rem;
+      border: 1px solid var(--gold);
+      transition: background 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                  color 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn-primary:hover        { background: transparent; color: var(--gold); }
+    .btn-primary:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+    .btn-primary:active       { background: #a8905f; border-color: #a8905f; color: var(--forest); }
+
+    @media (max-width: 600px) {
+      #hero { padding: 6rem 1.5rem 4rem; }
+      .hero-stem   { font-size: clamp(1.25rem, 5vw, 1.5rem); }
+      .hero-typed-line,
+      .hero-cursor { font-size: clamp(2rem, 8vw, 3rem); }
+      .hero-title  { font-size: clamp(2.25rem, 8vw, 3.5rem); }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       PILLARS STRIP
+    ══════════════════════════════════════════════════════════════ */
+    #pillars {
+      background: var(--forest);
+      border-bottom: 1px solid rgba(245,241,235,0.08);
+    }
+    .pillars-inner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .pillar {
+      padding: 2.75rem 2.5rem;
+      border-right: 1px solid rgba(245,241,235,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .pillar:last-child { border-right: none; }
+    .pillar-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.375rem;
+      font-weight: 500;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+    .pillar-body {
+      font-size: 0.9375rem;
+      color: rgba(245,241,235,0.6);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       SECTION SHARED STYLES
+    ══════════════════════════════════════════════════════════════ */
+    .section-label { margin-bottom: 1.125rem; }
+    .section-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.25rem, 3.75vw, 3.5rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--espresso);
+    }
+    .section-headline em { font-style: italic; }
+    .section-body {
+      font-size: 1.125rem;
+      color: var(--charcoal);
+      line-height: 1.85;
+    }
+    .section-body p + p { margin-top: 1rem; }
+
+    /* ══════════════════════════════════════════════════════════════
+       PROBLEM
+    ══════════════════════════════════════════════════════════════ */
+    #problem {
+      background: var(--cream);
+      padding: var(--sp-xl) 0;
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5.5rem;
+      align-items: center;
+    }
+    .problem-visual {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: var(--linen);
+    }
+    .problem-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.65) brightness(0.9);
+    }
+    .problem-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(69,47,30,0.3) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .problem-content { padding: 1.5rem 0; }
+    .problem-label   { color: var(--taupe); }
+
+    /* ══════════════════════════════════════════════════════════════
+       PROCESS
+    ══════════════════════════════════════════════════════════════ */
+    #process {
+      background: var(--forest);
+      padding: var(--sp-xl) 0;
+    }
+    .process-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .process-label   { color: var(--gold); margin-bottom: 1rem; }
+    .process-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(245,241,235,0.1);
+    }
+    .step {
+      padding: 2.75rem 2rem 2.75rem;
+      border-right: 1px solid rgba(245,241,235,0.1);
+    }
+    .step:last-child { border-right: none; }
+    .step-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(5rem, 7vw, 9.75rem);
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    .step-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3125rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+    .step-body {
+      font-size: 1rem;
+      color: rgba(245,241,235,0.6);
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════════════════════════════ */
+    #services {
+      background: var(--cream);
+      padding: var(--sp-xl) 0;
+    }
+    .services-header { margin-bottom: 3rem; }
+    .services-label  { color: var(--taupe); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5px;
+      background: rgba(156,142,123,0.18);
+    }
+    .service-card {
+      background: var(--cream);
+      padding: 2.5rem 1.75rem;
+      transition: background 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .service-card:hover { background: var(--linen); }
+    .service-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 1.375rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .service-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--espresso);
+      margin-bottom: 0.625rem;
+      line-height: 1.35;
+    }
+    .service-body {
+      font-size: 0.875rem;
+      color: var(--taupe);
+      line-height: 1.68;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       POSITIONING MAP
+    ══════════════════════════════════════════════════════════════ */
+    #different {
+      background: var(--linen);
+      padding: var(--sp-xl) 0;
+    }
+    .diff-header { margin-bottom: 3rem; }
+    .diff-label  { color: var(--taupe); }
+    .diff-headline { color: var(--espresso); max-width: 560px; }
+    .diff-sub { font-size: 1rem; color: var(--taupe); margin-top: 0.875rem; max-width: 500px; line-height: 1.7; }
+
+    .pos-layout {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .pos-map {
+      position: relative;
+      flex: 1 1 0;
+      min-width: 0;
+      height: clamp(400px, 52vw, 540px);
+      background: rgba(192,169,122,0.07);
+      border: 1px solid rgba(156,142,123,0.18);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    /* Axes */
+    .pos-axis-h {
+      position: absolute;
+      left: 7%; right: 7%;
+      top: 50%;
+      height: 1px;
+      background: rgba(156,142,123,0.28);
+    }
+    .pos-axis-v {
+      position: absolute;
+      top: 7%; bottom: 7%;
+      left: 50%;
+      width: 1px;
+      background: rgba(156,142,123,0.28);
+    }
+
+    /* Axis labels */
+    .pos-axis-lbl {
+      position: absolute;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--taupe);
+    }
+    .pos-lbl-top    { top: 2.5%;  left: 50%; transform: translateX(-50%); }
+    .pos-lbl-bottom { bottom: 2.5%; left: 50%; transform: translateX(-50%); }
+    .pos-lbl-left   { left: 1%;   top: 50%;  transform: translateY(-50%); writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg); }
+    .pos-lbl-right  { right: 1%;  top: 50%;  transform: translateY(-50%); writing-mode: vertical-rl; }
+
+    /* Nodes */
+    .pos-node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .pos-node-btn {
+      appearance: none;
+      -webkit-appearance: none;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      cursor: pointer;
+    }
+    .pos-node-btn:focus-visible .pos-card {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+    .pos-node--competitor {
+      appearance: none;
+      -webkit-appearance: none;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      cursor: pointer;
+    }
+    .pos-node--competitor:focus-visible .pos-card {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .pos-card {
+      background: rgba(234,227,214,0.9);
+      border: 1px solid rgba(156,142,123,0.35);
+      border-radius: 8px;
+      padding: 0.625rem 1rem 0.65rem;
+      min-width: 148px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.625rem;
+      text-align: left;
+      transition: background 0.22s cubic-bezier(0.22,1,0.36,1),
+                  border-color 0.22s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.22s cubic-bezier(0.22,1,0.36,1);
+    }
+    .pos-node--competitor:hover .pos-card   { background: var(--linen); border-color: var(--taupe); transform: translateY(-2px); }
+    .pos-node-btn[aria-pressed="true"] .pos-card:not(.pos-card--kaskey) {
+      background: var(--linen);
+      border-color: var(--chestnut);
+    }
+    .pos-node-btn[aria-pressed="true"] .pos-card--kaskey {
+      box-shadow:
+        0 0 0 2.5px rgba(245,241,235,0.55),
+        0 10px 32px rgba(60,74,64,0.45),
+        0 2px 8px rgba(60,74,64,0.2);
+    }
+    .pos-card--kaskey {
+      background: var(--forest);
+      border-color: var(--forest);
+      min-width: 168px;
+      box-shadow:
+        0 8px 28px rgba(60,74,64,0.3),
+        0 2px 6px rgba(60,74,64,0.15);
+    }
+    .pos-card-text { flex: 1; min-width: 0; }
+
+    .pos-icon { color: var(--taupe); flex-shrink: 0; }
+    .pos-icon--kaskey { color: var(--cream); flex-shrink: 0; }
+
+    .pos-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--espresso);
+      line-height: 1.25;
+    }
+    .pos-card--kaskey .pos-name { color: var(--cream); font-size: 1.0625rem; }
+
+    .pos-sub {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.6875rem;
+      letter-spacing: 0.03em;
+      color: var(--taupe);
+      margin-top: 2px;
+    }
+    .pos-card--kaskey .pos-sub { color: rgba(245,241,235,0.65); }
+
+    /* Gap label */
+    .pos-gap-label {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.5625rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      white-space: nowrap;
+      pointer-events: none;
+      font-style: italic;
+    }
+
+    /* Right-side description panel */
+    .pos-desc-panel {
+      flex: 0 0 280px;
+      width: 280px;
+      background: var(--cream);
+      border: 1px solid rgba(156,142,123,0.22);
+      border-left: 3px solid var(--chestnut);
+      padding: 2rem 1.75rem;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .pos-desc-inner {
+      transition: opacity 0.15s ease, transform 0.2s cubic-bezier(0.22,1,0.36,1);
+    }
+    .pos-desc-inner.transitioning {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    .pos-desc-role {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--espresso);
+      margin-bottom: 0.625rem;
+      line-height: 1.25;
+    }
+    .pos-desc-text {
+      font-size: 0.9375rem;
+      color: var(--charcoal);
+      line-height: 1.8;
+    }
+
+    /* Mobile: hide map, show list */
+    .pos-mobile-list { display: none; }
+    @media (max-width: 700px) {
+      .pos-layout    { flex-direction: column; }
+      .pos-map       { display: none; }
+      .pos-desc-panel { display: none; }
+      .pos-mobile-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(156,142,123,0.18); }
+      .pos-mob-card {
+        background: var(--cream);
+        padding: 1.5rem 1.25rem;
+        display: flex; flex-direction: column; gap: 0.25rem;
+      }
+      .pos-mob-card .pos-name { font-size: 1rem; }
+      .pos-mob-card .pos-sub  { font-size: 0.75rem; }
+      .pos-mob-card.kaskey { background: var(--forest); }
+      .pos-mob-card.kaskey .pos-name { color: var(--cream); }
+      .pos-mob-card.kaskey .pos-sub  { color: rgba(245,241,235,0.65); }
+      .pos-mob-card.kaskey .pos-icon { color: var(--cream); }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       WORKSTREAMS ACCORDION
+    ══════════════════════════════════════════════════════════════ */
+    #workstreams {
+      background: var(--cream);
+      padding: var(--sp-xl) 0;
+    }
+    .ws-header { margin-bottom: 3.5rem; }
+    .ws-label  { color: var(--taupe); }
+
+    .ws-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.5rem, 4vw, 3.75rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--espresso);
+      margin-top: 1.125rem;
+    }
+    .ws-headline-sub {
+      font-style: italic;
+      color: var(--chestnut);
+      display: block;
+    }
+    .ws-subline {
+      margin-top: 1rem;
+      font-size: 1.125rem;
+      color: var(--taupe);
+      line-height: 1.75;
+    }
+
+    /* ── Workstreams Tabs ─────────────────────────────────────── */
+    .ws-tab-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: rgba(156,142,123,0.2);
+      border: 1px solid rgba(156,142,123,0.2);
+      border-bottom: none;
+    }
+    .ws-tab {
+      background: var(--cream);
+      border: none;
+      padding: 2.25rem 1.25rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.875rem;
+      text-align: center;
+      font: inherit;
+      position: relative;
+      transition: background 0.22s cubic-bezier(0.22,1,0.36,1);
+    }
+    .ws-tab:hover  { background: var(--linen); }
+    .ws-tab.active { background: var(--linen); }
+    .ws-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      z-index: 1;
+    }
+    .ws-tab:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+    .ws-tab-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--taupe);
+      transition: color 0.22s;
+    }
+    .ws-tab.active .ws-tab-icon,
+    .ws-tab:hover  .ws-tab-icon { color: var(--forest); }
+    .ws-tab-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--taupe);
+      line-height: 1.3;
+      transition: color 0.22s;
+    }
+    .ws-tab.active .ws-tab-name,
+    .ws-tab:hover  .ws-tab-name { color: var(--espresso); }
+
+    .ws-panel-area {
+      border: 1px solid rgba(156,142,123,0.2);
+      background: var(--linen);
+      padding: 2.5rem 2rem 2rem;
+      min-height: 300px;
+    }
+    .ws-panel-content { display: none; }
+    .ws-panel-content.active {
+      display: block;
+      animation: wsPanelIn 0.38s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes wsPanelIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .ws-pills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.625rem;
+    }
+    .ws-pill {
+      background: var(--cream);
+      color: var(--espresso);
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      line-height: 1.5;
+      padding: 1rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(192,169,122,0.28);
+      cursor: default;
+      text-align: center;
+      transition: background 0.22s cubic-bezier(0.22,1,0.36,1),
+                  border-color 0.22s cubic-bezier(0.22,1,0.36,1),
+                  transform    0.22s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow   0.22s cubic-bezier(0.22,1,0.36,1);
+    }
+    .ws-pill:hover {
+      background: rgba(192,169,122,0.18);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(192,169,122,0.18), 0 1px 4px rgba(192,169,122,0.12);
+    }
+
+    @media (max-width: 900px) {
+      .ws-tab-row { grid-template-columns: repeat(3, 1fr); }
+      .ws-pills   { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .ws-tab-row {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        border-bottom: none;
+      }
+      .ws-tab-row::-webkit-scrollbar { display: none; }
+      .ws-tab { flex: 0 0 auto; min-width: 130px; padding: 1.5rem 1rem; }
+      .ws-panel-area { padding: 1.5rem 1.25rem; }
+      .ws-pills { grid-template-columns: 1fr; gap: 0.625rem; }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════════════════════════════ */
+    #ai-note {
+      background: var(--cream);
+      padding: var(--sp-xl) 0;
+    }
+    .ai-note-rule {
+      border: none;
+      border-top: 1px solid rgba(192,169,122,0.30);
+      margin: 0 0 4rem;
+    }
+    .ai-rows {
+      width: 100%;
+      margin-top: 3.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+    .ai-row {
+      border-top: 2px solid var(--gold);
+      padding: 2.25rem 2rem 2.5rem;
+      background: var(--linen);
+      border-radius: 6px;
+      text-align: left;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ai-row:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 32px rgba(69,47,30,0.1),
+        0 2px 8px rgba(69,47,30,0.06);
+    }
+    .ai-row-statement {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.1875rem;
+      font-weight: 500;
+      color: var(--espresso);
+      line-height: 1.3;
+    }
+    .ai-row-support {
+      font-size: 0.9375rem;
+      color: var(--taupe);
+      line-height: 1.75;
+      margin-top: 0.875rem;
+    }
+    @media (max-width: 700px) {
+      .ai-rows {
+        grid-template-columns: 1fr;
+        margin-top: 2.5rem;
+        gap: 1.25rem;
+      }
+    }
+
+    #about {
+      background: var(--espresso);
+      padding: var(--sp-xl) 0;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+      overflow: hidden;
+      width: min(340px, 90%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(69,47,30,0.4);
+      margin: 0 auto;
+      box-shadow:
+        0 24px 64px rgba(30,18,10,0.55),
+        0 4px 16px rgba(30,18,10,0.3),
+        inset 0 0 0 1px rgba(192,169,122,0.18);
+    }
+    .about-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: saturate(0.88) brightness(0.96) sepia(0.08);
+    }
+    .about-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(to top, rgba(69,47,30,0.22) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    .about-label      { color: var(--gold); }
+    .about-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-top: 1.125rem;
+      margin-bottom: 1.75rem;
+    }
+    .about-headline em { font-style: italic; color: var(--gold); }
+    .about-body {
+      font-size: 1.125rem;
+      color: rgba(245,241,235,0.75);
+      line-height: 1.8;
+    }
+    .about-body p + p { margin-top: 1rem; }
+    .about-sig {
+      margin-top: 2rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.375rem;
+      color: var(--gold);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       QUOTE
+    ══════════════════════════════════════════════════════════════ */
+    #quote {
+      background: var(--charcoal);
+      padding: 7rem 0;
+    }
+    .quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 400;
+      font-style: normal;
+      color: var(--cream);
+      line-height: 1.55;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .quote-label {
+      text-align: center;
+      font-size: 0.625rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1.75rem;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════════════════════════════ */
+    #contact {
+      background: var(--cream);
+      padding: var(--sp-xl) 0;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6.5rem;
+      align-items: start;
+    }
+    .contact-label   { color: var(--taupe); }
+    .contact-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
+      color: var(--espresso);
+      margin-top: 1.125rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-body {
+      font-size: 1rem;
+      color: var(--taupe);
+      line-height: 1.75;
+    }
+    .contact-email {
+      display: inline-block;
+      margin-top: 1.25rem;
+      font-size: 0.875rem;
+      color: var(--chestnut);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(139,94,60,0.35);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-email:hover { color: var(--espresso); border-color: var(--espresso); }
+
+    .form-group { margin-bottom: 1.375rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.6875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--taupe);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(156,142,123,0.4);
+      padding: 0.55rem 0;
+      font-family: 'Figtree', sans-serif;
+      font-size: 1rem;
+      color: var(--charcoal);
+      outline: none;
+      resize: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(156,142,123,0.7);
+      font-size: 0.9375rem;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-bottom-color: var(--espresso); }
+
+    .btn-submit {
+      margin-top: 2rem;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--cream);
+      background: var(--forest);
+      border: 1px solid var(--forest);
+      padding: 0.875rem 2.25rem;
+      cursor: pointer;
+      transition: background 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                  color 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn-submit:hover        { background: transparent; color: var(--forest); }
+    .btn-submit:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    /* ══════════════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════════════ */
+    footer {
+      background: var(--espresso);
+      padding: 3.5rem 2.5rem 0;
+    }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(245,241,235,0.1);
+      margin-bottom: 0;
+    }
+    .footer-logo img { height: 30px; width: auto; display: block; }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.6875rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(245,241,235,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+
+    .footer-wordmark {
+      padding: 2rem 0 0;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .footer-wordmark img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.1;
+      filter: brightness(10);
+    }
+    .footer-copy {
+      font-size: 0.6875rem;
+      color: rgba(245,241,235,0.3);
+      text-align: center;
+      letter-spacing: 0.06em;
+      padding: 1.25rem 0 2rem;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════════════════ */
+    @media (max-width: 960px) {
+      #hero                 { grid-template-columns: 1fr; }
+      .hero-visual          { display: none; }
+      .hero-content         { padding: 4rem 2rem 4rem; max-width: 100%; }
+
+      .problem-grid         { grid-template-columns: 1fr; gap: 3rem; }
+      .problem-visual       { aspect-ratio: 16/9; }
+
+      .steps-grid           { grid-template-columns: 1fr 1fr; }
+      .step:nth-child(2)    { border-right: none; }
+
+      .services-grid        { grid-template-columns: repeat(2, 1fr); }
+      .service-card:nth-child(5) { grid-column: span 2; }
+
+      .about-grid           { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual         { aspect-ratio: 16/9; max-height: 360px; }
+
+      .contact-grid         { grid-template-columns: 1fr; gap: 3.5rem; }
+      .pillars-inner        { grid-template-columns: 1fr; }
+      .pillar               { border-right: none; border-bottom: 1px solid rgba(245,241,235,0.1); }
+      .pillar:last-child    { border-bottom: none; }
+
+      .nav-links            { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .steps-grid           { grid-template-columns: 1fr; }
+      .step                 { border-right: none; }
+      .services-grid        { grid-template-columns: 1fr; }
+      .service-card:nth-child(5) { grid-column: span 1; }
+      .container, .container-narrow { padding: 0 1.25rem; }
+      footer                { padding: 3rem 1.25rem 0; }
+      .footer-top           { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+      .footer-links         { flex-wrap: wrap; gap: 1rem 1.5rem; }
+      .diff-table th, .diff-table td { padding: 0.7rem 0.75rem; font-size: 0.8125rem; }
+    }
+
+    /* ── Form states ────────────────────────────────────────────── */
+    .form-field-error {
+      font-size: 0.75rem;
+      color: #b94444;
+      margin-top: 0.375rem;
+      display: none;
+    }
+    .form-group.has-error .form-field-error { display: block; }
+    .form-group.has-error input,
+    .form-group.has-error textarea { border-bottom-color: #b94444; }
+
+    .form-success {
+      display: none;
+      padding: 2rem 0;
+    }
+    .form-success.visible { display: block; }
+    .form-success-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.375rem;
+      font-weight: 500;
+      color: var(--espresso);
+      margin-bottom: 0.625rem;
+    }
+    .form-success-body {
+      font-size: 0.9375rem;
+      color: var(--taupe);
+      line-height: 1.7;
+    }
+
+    .form-error-banner {
+      display: none;
+      font-size: 0.875rem;
+      color: #b94444;
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(185,68,68,0.25);
+      background: rgba(185,68,68,0.05);
+    }
+    .form-error-banner.visible { display: block; }
+
+    .ws-subline p + p { margin-top: 0.75rem; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════ NAV ═══════════════════ -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main">
+    <a href="#" class="nav-logo" aria-label="Kaskey Consulting, home">
+      <img src="3.png" alt="Kaskey Consulting" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#process">Services</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section id="hero" aria-label="Introduction">
+
+    <div class="hero-top">
+      <div class="hero-inner">
+        <h1>
+          <span class="hero-stem" id="hero-stem">I forgot to</span>
+          <br>
+          <span class="hero-typed-line">
+            <span id="hero-typed"></span><span class="hero-cursor" aria-hidden="true">_</span>
+          </span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="hero-inner">
+        <div class="hero-divider" aria-hidden="true"></div>
+        <p class="hero-brand-name">Kaskey Consulting</p>
+        <p class="hero-title">Your Family&#8217;s <em>Chief of Staff.</em></p>
+        <p class="hero-supporting">Life admin managed proactively, continuously, and built around how your family actually lives.</p>
+        <div class="hero-cta-wrap">
+          <a href="#contact" class="btn-primary">Work with us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════ PILLARS ═══════════════════ -->
+  <section id="pillars" aria-label="What sets this apart">
+    <div class="pillars-inner">
+      <div class="pillar reveal">
+        <p class="pillar-title">Proactive, not reactive</p>
+        <p class="pillar-body">We anticipate what's coming rather than waiting for you to ask.</p>
+      </div>
+      <div class="pillar reveal reveal-d1">
+        <p class="pillar-title">Systems built around you</p>
+        <p class="pillar-body">Designed around how your family actually lives, not a template.</p>
+      </div>
+      <div class="pillar reveal reveal-d2">
+        <p class="pillar-title">Small roster, by design</p>
+        <p class="pillar-body">We work with a limited number of families so we can know yours well.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PROBLEM ═══════════════════ -->
+  <section id="problem" aria-label="The situation">
+    <div class="container">
+      <div class="problem-grid">
+        <div class="problem-visual reveal">
+          <img src="images/mary-skrynnikova-x1BnEh4k-S8-unsplash.jpg" alt="" aria-hidden="true" />
+        </div>
+        <div class="problem-content">
+          <span class="label section-label problem-label reveal">The situation</span>
+          <h2 class="section-headline reveal reveal-d1">
+            You're not behind.<br>You're just always<br><em style="color:var(--chestnut);">slightly reactive.</em>
+          </h2>
+          <div class="section-body reveal reveal-d2" style="margin-top: 1.75rem;">
+            <p>Most families we work with are managing demanding careers, kids, properties, and a full social life.</p>
+            <p>They're not failing. They're just always a step behind the things that require foresight.</p>
+            <p>The dentist appointment that gets made too late.<br>The anniversary dinner planned the week of.<br>The summer camp search that starts after everything is already full.</p>
+            <p>They have the resources to live well. What they're missing is someone holding the full picture, and running it forward.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PROCESS ═══════════════════ -->
+  <section id="process" aria-label="How it works">
+    <div class="container">
+      <div class="process-header">
+        <span class="label process-label reveal">How it works</span>
+        <h2 class="process-headline reveal reveal-d1">Four steps to getting your life back</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Intake &amp; Discovery</h3>
+          <p class="step-body">We spend time understanding how your household actually operates: your priorities, your rhythms, your vendors, your recurring commitments. No generic intake forms.</p>
+        </div>
+        <div class="step reveal reveal-d1">
+          <div class="step-num">02</div>
+          <h3 class="step-title">System Design</h3>
+          <p class="step-body">We build simple, collaborative systems around how you already live. The goal is a structure that feels effortless, not something you have to manage on top of everything else.</p>
+        </div>
+        <div class="step reveal reveal-d2">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Ongoing Retainer</h3>
+          <p class="step-body">We stay involved month over month, not as a project manager you check in with, but as an operational partner who already knows your life and anticipates what's coming.</p>
+        </div>
+        <div class="step reveal reveal-d3">
+          <div class="step-num">04</div>
+          <h3 class="step-title">Standing Check-in</h3>
+          <p class="step-body">Regular structured touchpoints keep us aligned. You know what's handled. We know what's changed. Nothing waits for you to think to ask.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ WORKSTREAMS ═══════════════════ -->
+  <section id="workstreams" aria-label="What moves off your plate">
+    <div class="container">
+
+      <div class="ws-header">
+        <span class="label ws-label reveal">What moves off your plate</span>
+        <h2 class="ws-headline reveal reveal-d1">
+          Built to run<br>
+          <span class="ws-headline-sub">without you.</span>
+        </h2>
+        <div class="ws-subline reveal reveal-d2">
+          <p>Not delegated. Owned. We make sure it's handled, before it ever becomes something you have to think about.</p>
+          <p>That only works because we build the foundation upfront.</p>
+          <p>We map how your household actually runs: your preferences, your routines, your recurring commitments, so we can operate independently, without needing constant input or direction.</p>
+          <p>From there, we manage your life across five core areas, all of which move off your plate entirely.</p>
+        </div>
+      </div>
+
+      <div class="ws-tab-row reveal reveal-d3" role="tablist" aria-label="Service areas">
+
+        <button class="ws-tab active" role="tab" id="ws-tab-cal" aria-selected="true" aria-controls="ws-panel-cal">
+          <div class="ws-tab-icon" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+            </svg>
+          </div>
+          <span class="ws-tab-name">Calendar &amp; time</span>
+        </button>
+
+        <button class="ws-tab" role="tab" id="ws-tab-rel" aria-selected="false" aria-controls="ws-panel-rel">
+          <div class="ws-tab-icon" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <span class="ws-tab-name">Relationships &amp; obligations</span>
+        </button>
+
+        <button class="ws-tab" role="tab" id="ws-tab-house" aria-selected="false" aria-controls="ws-panel-house">
+          <div class="ws-tab-icon" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/>
+              <rect x="9" y="14" width="6" height="7"/>
+            </svg>
+          </div>
+          <span class="ws-tab-name">Household &amp; vendors</span>
+        </button>
+
+        <button class="ws-tab" role="tab" id="ws-tab-travel" aria-selected="false" aria-controls="ws-panel-travel">
+          <div class="ws-tab-icon" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+            </svg>
+          </div>
+          <span class="ws-tab-name">Travel &amp; logistics</span>
+        </button>
+
+        <button class="ws-tab" role="tab" id="ws-tab-research" aria-selected="false" aria-controls="ws-panel-research">
+          <div class="ws-tab-icon" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+          <span class="ws-tab-name">Research &amp; decisions</span>
+        </button>
+
+      </div>
+
+      <div class="ws-panel-area reveal reveal-d4">
+
+        <div class="ws-panel-content active" id="ws-panel-cal" role="tabpanel" aria-labelledby="ws-tab-cal">
+          <div class="ws-pills">
+            <span class="ws-pill">Dentist appointments booked before it even crosses your mind</span>
+            <span class="ws-pill">School calendar fully mapped before the year gets busy</span>
+            <span class="ws-pill">Annual physicals handled early, not when they're overdue</span>
+            <span class="ws-pill">Travel blocked before your calendar fills up</span>
+            <span class="ws-pill">Conflicts caught before they become a problem</span>
+            <span class="ws-pill">The next three months already thought through</span>
+          </div>
+        </div>
+
+        <div class="ws-panel-content" id="ws-panel-rel" role="tabpanel" aria-labelledby="ws-tab-rel">
+          <div class="ws-pills">
+            <span class="ws-pill">Wedding gifts handled weeks before the event</span>
+            <span class="ws-pill">Birthday plans done before you're scrambling</span>
+            <span class="ws-pill">Teacher appreciation taken care of without thinking about it</span>
+            <span class="ws-pill">Thank-you notes sent while it still matters</span>
+            <span class="ws-pill">Holidays planned early, not all at once in December</span>
+            <span class="ws-pill">The people who matter never get overlooked</span>
+          </div>
+        </div>
+
+        <div class="ws-panel-content" id="ws-panel-house" role="tabpanel" aria-labelledby="ws-tab-house">
+          <div class="ws-pills">
+            <span class="ws-pill">HVAC, filters, and maintenance handled before you notice</span>
+            <span class="ws-pill">Contractors followed up with so nothing stalls</span>
+            <span class="ws-pill">Insurance reviewed before it quietly renews</span>
+            <span class="ws-pill">Vendors coordinated so you're never chasing</span>
+            <span class="ws-pill">Household supplies restocked before you run out</span>
+            <span class="ws-pill">The house runs without you managing it</span>
+          </div>
+        </div>
+
+        <div class="ws-panel-content" id="ws-panel-travel" role="tabpanel" aria-labelledby="ws-tab-travel">
+          <div class="ws-pills">
+            <span class="ws-pill">Trips planned early, before the best options disappear</span>
+            <span class="ws-pill">Flights, seats, and preferences already handled</span>
+            <span class="ws-pill">Itineraries built around how your family actually travels</span>
+            <span class="ws-pill">Reservations and transport set before you arrive</span>
+            <span class="ws-pill">Packing and logistics handled ahead of time</span>
+            <span class="ws-pill">You land and everything is already in place</span>
+          </div>
+        </div>
+
+        <div class="ws-panel-content" id="ws-panel-research" role="tabpanel" aria-labelledby="ws-tab-research">
+          <div class="ws-pills">
+            <span class="ws-pill">Summer camps narrowed down before registration opens</span>
+            <span class="ws-pill">Pediatricians researched and ready when you need one</span>
+            <span class="ws-pill">One clear gift idea instead of endless searching</span>
+            <span class="ws-pill">Contractors vetted so you don't start from scratch</span>
+            <span class="ws-pill">Reservations secured without last-minute stress</span>
+            <span class="ws-pill">You get a recommendation, not a list</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ POSITIONING MAP ═══════════════════ -->
+  <section id="different" aria-label="How Kaskey Consulting is different">
+    <div class="container">
+
+      <div class="diff-header">
+        <span class="label section-label diff-label reveal">Why this is different</span>
+        <h2 class="section-headline diff-headline reveal reveal-d1" style="margin-top: 1.125rem;">
+          There's a gap<br><em style="color:var(--chestnut);">no one else fills.</em>
+        </h2>
+        <p class="diff-sub reveal reveal-d2">Most support is either reactive or narrowly focused. We operate across the full picture, proactively.</p>
+      </div>
+
+      <!-- ── Layout: map left + description right ── -->
+      <div class="pos-layout reveal reveal-d2">
+
+      <!-- ── Quadrant map (desktop) ── -->
+      <div class="pos-map" aria-label="Positioning map: Kaskey Consulting is the only proactive, whole-family service">
+
+        <!-- Axes -->
+        <div class="pos-axis-h" aria-hidden="true"></div>
+        <div class="pos-axis-v" aria-hidden="true"></div>
+
+        <!-- Axis labels -->
+        <span class="pos-axis-lbl pos-lbl-top"  aria-hidden="true">Proactive</span>
+        <span class="pos-axis-lbl pos-lbl-bottom" aria-hidden="true">Reactive</span>
+        <span class="pos-axis-lbl pos-lbl-left"  aria-hidden="true">Narrow</span>
+        <span class="pos-axis-lbl pos-lbl-right" aria-hidden="true">Whole</span>
+
+        <!-- ── Kaskey Consulting ── -->
+        <button class="pos-node pos-node-btn" style="left:72%;top:19%;" data-key="kaskey" aria-pressed="true" aria-label="Kaskey Consulting, click for details">
+          <div class="pos-card pos-card--kaskey">
+            <svg class="pos-icon--kaskey" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.5" stroke="var(--cream)" stroke-width="1.5"/>
+              <polygon points="12,3.5 13.8,10.5 12,12 10.2,10.5" fill="var(--cream)"/>
+              <polygon points="20.5,12 13.5,13.8 12,12 13.5,10.2" fill="var(--cream)" opacity="0.55"/>
+              <polygon points="12,20.5 10.2,13.5 12,12 13.8,13.5" fill="var(--cream)" opacity="0.55"/>
+              <polygon points="3.5,12 10.5,10.2 12,12 10.5,13.8" fill="var(--cream)" opacity="0.55"/>
+            </svg>
+            <div class="pos-card-text">
+              <div class="pos-name">Kaskey Consulting</div>
+              <div class="pos-sub">Proactive · whole family · ongoing</div>
+            </div>
+          </div>
+        </button>
+
+        <!-- ── Competitor nodes ── -->
+
+        <button class="pos-node pos-node-btn pos-node--competitor" style="left:16%;top:12%;" data-key="estate" aria-pressed="false" aria-label="Estate manager, click for details">
+          <div class="pos-card">
+            <svg class="pos-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="1.5"/>
+              <line x1="2" y1="8" x2="22" y2="8"/><line x1="2" y1="14" x2="22" y2="14"/>
+              <line x1="8" y1="8" x2="8" y2="22"/><line x1="14" y1="8" x2="14" y2="22"/>
+            </svg>
+            <div class="pos-card-text">
+              <div class="pos-name">Estate manager</div>
+              <div class="pos-sub">UHNW · multi-property</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="pos-node pos-node-btn pos-node--competitor" style="left:22%;top:45%;" data-key="house" aria-pressed="false" aria-label="House manager, click for details">
+          <div class="pos-card">
+            <svg class="pos-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/><rect x="9" y="14" width="6" height="7"/>
+            </svg>
+            <div class="pos-card-text">
+              <div class="pos-name">House manager</div>
+              <div class="pos-sub">Physical home only</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="pos-node pos-node-btn pos-node--competitor" style="left:35%;top:62%;" data-key="corporate-ea" aria-pressed="false" aria-label="Corporate EA, click for details">
+          <div class="pos-card">
+            <svg class="pos-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+            </svg>
+            <div class="pos-card-text">
+              <div class="pos-name">Corporate EA</div>
+              <div class="pos-sub">Reactive · office-trained</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="pos-node pos-node-btn pos-node--competitor" style="left:48%;top:72%;" data-key="pa" aria-pressed="false" aria-label="Personal assistant, click for details">
+          <div class="pos-card">
+            <svg class="pos-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            <div class="pos-card-text">
+              <div class="pos-name">Personal assistant</div>
+              <div class="pos-sub">Reactive executor</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="pos-node pos-node-btn pos-node--competitor" style="left:58%;top:42%;" data-key="coach" aria-pressed="false" aria-label="Life coach, click for details">
+          <div class="pos-card">
+            <svg class="pos-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <div class="pos-card-text">
+              <div class="pos-name">Life coach</div>
+              <div class="pos-sub">Advisory, not operational</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="pos-node pos-node-btn pos-node--competitor" style="left:68%;top:80%;" data-key="concierge" aria-pressed="false" aria-label="Concierge service, click for details">
+          <div class="pos-card">
+            <svg class="pos-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><line x1="12" y1="2" x2="12" y2="4"/>
+            </svg>
+            <div class="pos-card-text">
+              <div class="pos-name">Concierge service</div>
+              <div class="pos-sub">Transactional, no continuity</div>
+            </div>
+          </div>
+        </button>
+
+      </div><!-- /pos-map -->
+
+      <!-- Right: description panel -->
+      <div class="pos-desc-panel" id="pos-desc-panel">
+        <div class="pos-desc-inner">
+          <p class="pos-desc-role">Kaskey Consulting</p>
+          <p class="pos-desc-text">The proactive Chief of Staff for your family. I hold the full picture — managing the life admin that high-achieving families never have time to stay ahead of, on an ongoing retainer basis.</p>
+        </div>
+      </div>
+
+      </div><!-- /pos-layout -->
+
+      <p style="text-align:center; font-size:0.75rem; font-style:italic; color:var(--taupe); margin-top:1.25rem;">Positioning reflects typical engagement model, not every provider in each category.</p>
+
+      <!-- Mobile fallback list -->
+      <div class="pos-mobile-list" aria-label="Service comparison">
+        <div class="pos-mob-card kaskey">
+          <svg class="pos-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.5" stroke="var(--cream)" stroke-width="1.25"/>
+            <polygon points="12,3.5 13.8,10.5 12,12 10.2,10.5" fill="var(--cream)"/>
+          </svg>
+          <div class="pos-name">Kaskey Consulting</div>
+          <div class="pos-sub">Proactive · whole family · ongoing</div>
+        </div>
+        <div class="pos-mob-card">
+          <div class="pos-name">Life coach</div>
+          <div class="pos-sub">Advisory, not operational</div>
+        </div>
+        <div class="pos-mob-card">
+          <div class="pos-name">Estate manager</div>
+          <div class="pos-sub">UHNW · multi-property</div>
+        </div>
+        <div class="pos-mob-card">
+          <div class="pos-name">House manager</div>
+          <div class="pos-sub">Physical home only</div>
+        </div>
+        <div class="pos-mob-card">
+          <div class="pos-name">Corporate EA</div>
+          <div class="pos-sub">Reactive · office-trained</div>
+        </div>
+        <div class="pos-mob-card">
+          <div class="pos-name">Personal assistant</div>
+          <div class="pos-sub">Reactive executor</div>
+        </div>
+        <div class="pos-mob-card">
+          <div class="pos-name">Concierge service</div>
+          <div class="pos-sub">Transactional, no continuity</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════ AI NOTE ═══════════════════ -->
+  <section id="ai-note" aria-label="In the age of AI">
+    <div class="container">
+      <hr class="ai-note-rule reveal" />
+      <span class="label reveal reveal-d1" style="color:var(--taupe);">Even with the best tools</span>
+      <h2 class="ws-headline reveal reveal-d2" style="margin-top:1.125rem; max-width:760px;">
+        Some things still need<br>
+        <span class="ws-headline-sub">a real person.</span>
+      </h2>
+      <div class="ai-rows">
+        <div class="ai-row reveal reveal-d3">
+          <p class="ai-row-statement">The tools exist. So does the gap.</p>
+          <p class="ai-row-support">You can set reminders. You can make lists.<br>But no one is making sure anything actually runs ahead of you.</p>
+        </div>
+        <div class="ai-row reveal reveal-d4">
+          <p class="ai-row-statement">Context can&#8217;t be automated.</p>
+          <p class="ai-row-support">No tool knows how your life actually works — what matters, what&#8217;s been missed before, or what needs to happen next.</p>
+        </div>
+        <div class="ai-row reveal reveal-d5">
+          <p class="ai-row-statement">Judgment is built over time.</p>
+          <p class="ai-row-support">The difference isn&#8217;t information.<br>It&#8217;s someone paying attention — consistently, and with context.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ABOUT ═══════════════════ -->
+  <section id="about" aria-label="About Liza Kaskey">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <img src="Headshot.png" alt="Liza Kaskey" />
+        </div>
+        <div class="about-text">
+          <span class="label about-label reveal">About Liza</span>
+          <h2 class="about-headline reveal reveal-d1">
+            Built for this.<br><em>By design.</em>
+          </h2>
+          <div class="about-body reveal reveal-d2">
+            <p>Liza Kaskey is the founder of Kaskey Consulting. With a background in investment banking, she spent years operating in high-stakes environments where precision, coordination, and disciplined execution were essential.</p>
+            <p>She established the firm to bring institutional-grade structure to the management of modern family life. Through thoughtful systems and steady oversight, she helps households operate with clarity and continuity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ MISSION ═══════════════════ -->
+  <section id="quote" aria-label="Mission statement">
+    <div class="container">
+      <p class="quote-label reveal">Mission statement</p>
+      <p class="quote-text reveal reveal-d1">
+        To hold the full picture of your family's life and run it forward — bringing structure, clarity, and proactive execution to everything behind the scenes.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CONTACT ═══════════════════ -->
+  <section id="contact" aria-label="Inquire">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-left">
+          <span class="label contact-label reveal">Get in touch</span>
+          <h2 class="contact-headline reveal reveal-d1">
+            What would it feel like if nothing had to sit on your mind?
+          </h2>
+          <p class="contact-body reveal reveal-d2">
+            We work with a small number of families at a time, by design.<br>
+            If this feels aligned, share a bit about your household and what you're looking for.
+          </p>
+          <a href="mailto:inquiries@kaskeyconsulting.co" class="contact-email reveal reveal-d3">
+            inquiries@kaskeyconsulting.co
+          </a>
+        </div>
+
+        <div class="contact-right reveal reveal-d1">
+          <form
+            id="inquire-form"
+            name="inquire"
+            method="POST"
+            data-netlify="true"
+            novalidate
+          >
+            <input type="hidden" name="form-name" value="inquire" />
+            <input type="hidden" name="_replyto" value="inquiries@kaskeyconsulting.co" />
+            <div class="form-group" id="fg-name">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" placeholder="First and last" autocomplete="name" />
+              <span class="form-field-error">Please enter your name.</span>
+            </div>
+            <div class="form-group" id="fg-email">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
+              <span class="form-field-error">Please enter a valid email address.</span>
+            </div>
+            <div class="form-group" id="fg-household">
+              <label for="household">Tell me about your household</label>
+              <textarea
+                id="household"
+                name="household"
+                rows="4"
+                placeholder="kids, home maintenance, appointments, life admin, what's feeling unmanaged..."
+              ></textarea>
+              <span class="form-field-error">Please tell me a bit about your household.</span>
+            </div>
+            <button type="submit" class="btn-submit" id="submit-btn">Send inquiry</button>
+            <div class="form-error-banner" id="form-error-banner">
+              Something went wrong. Please try again or email inquiries@kaskeyconsulting.co directly.
+            </div>
+          </form>
+          <div class="form-success" id="form-success">
+            <p class="form-success-title">Thank you.</p>
+            <p class="form-success-body">We'll be in touch personally within 48 hours.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo">
+        <img src="3.png" alt="Kaskey Consulting" />
+      </div>
+      <ul class="footer-links" role="list">
+        <li><a href="#process">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="mailto:inquiries@kaskeyconsulting.co">inquiries@kaskeyconsulting.co</a></li>
+      </ul>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">
+      <img src="1.png" alt="" />
+    </div>
+    <p class="footer-copy">© 2026 Kaskey Consulting. All rights reserved.</p>
+  </footer>
+
+  <script>
+    /* ── Typewriter hero ── */
+    (function () {
+      const cycles = [
+        {
+          stem: 'I forgot to',
+          phrases: [
+            'book the dentist. Again.',
+            'order the gift. The party is in three days.',
+            'plan something for our anniversary.',
+            'schedule spring break before everything sold out.',
+            'follow up with the contractor.',
+            'renew the insurance before it auto-renewed.',
+          ],
+        },
+        {
+          stem: 'I need someone to',
+          phrases: [
+            'just handle the calendar.',
+            'know my preferences without asking.',
+            'tell me what\u2019s coming before it\u2019s urgent.',
+            'research summer camps and give me one answer.',
+            'own the vendors so I don\u2019t have to chase.',
+            'be two steps ahead.',
+          ],
+        },
+      ];
+
+      const TYPE_SPEED   = 65;
+      const DELETE_SPEED = 35;
+      const WAIT_TIME    = 2000;
+
+      const stemEl  = document.getElementById('hero-stem');
+      const typedEl = document.getElementById('hero-typed');
+
+      let cycleIdx  = 0;
+      let phraseIdx = 0;
+      let charIdx   = 0;
+      let deleting  = false;
+
+      function tick() {
+        const cycle  = cycles[cycleIdx];
+        const phrase = cycle.phrases[phraseIdx];
+
+        if (!deleting) {
+          charIdx++;
+          typedEl.textContent = phrase.slice(0, charIdx);
+          if (charIdx === phrase.length) {
+            deleting = true;
+            setTimeout(tick, WAIT_TIME);
+            return;
+          }
+          setTimeout(tick, TYPE_SPEED);
+        } else {
+          charIdx--;
+          typedEl.textContent = phrase.slice(0, charIdx);
+          if (charIdx === 0) {
+            deleting = false;
+            phraseIdx++;
+            if (phraseIdx >= cycle.phrases.length) {
+              phraseIdx = 0;
+              cycleIdx  = (cycleIdx + 1) % cycles.length;
+              stemEl.textContent = cycles[cycleIdx].stem;
+            }
+            setTimeout(tick, 400);
+            return;
+          }
+          setTimeout(tick, DELETE_SPEED);
+        }
+      }
+
+      stemEl.textContent = cycles[0].stem;
+      setTimeout(tick, 800);
+    }());
+  </script>
+
+  <script>
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            revealObserver.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.07, rootMargin: '0px 0px -36px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+    // Workstreams tabs
+    document.querySelectorAll('.ws-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('aria-controls');
+        document.querySelectorAll('.ws-tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.ws-panel-content').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+
+    // Positioning map — competitor node click-to-expand
+    const posDescriptions = {
+      kaskey:    { name: 'Kaskey Consulting', text: 'The proactive Chief of Staff for your family. We hold the full picture — managing the life admin that high-achieving families never have time to stay ahead of, on an ongoing retainer basis.' },
+      estate:       { name: 'Estate manager', text: 'Manages properties, staff, and household operations at significant scale. Built for households with full-time infrastructure needs. The complexity they\'re designed for is different — and typically requires a much larger dedicated team.' },
+      house:        { name: 'House manager', text: 'Manages the physical home — vendors, maintenance, household staff. Strong within that lane, but the lane ends at your front door. Doesn\'t touch calendars, social obligations, travel, or anything that lives outside the four walls.' },
+      'corporate-ea': { name: 'Corporate EA', text: 'Trained for the corporate environment — inbox, scheduling, travel booking for one executive\'s professional life. Reactive by default. Built for a company, not a household. You direct them; they execute.' },
+      pa:           { name: 'Personal assistant', text: 'Executes tasks as directed. The intelligence stays with you — you still carry the mental model and decide what to delegate. Strong executor, not a strategic partner. The mental load never actually transfers.' },
+      coach:        { name: 'Life coach', text: 'A trained partner for personal and professional growth — goal clarity, accountability, long-term change. But a life coach works on how you want to live, not how your life actually runs.' },
+      concierge:    { name: 'Concierge service', text: 'Handles one-off requests across any category of life. Broad in scope but shallow in depth — no relationship, no accumulated context, starts from zero every time. Excellent for what it is. Not a substitute for operational partnership.' },
+    };
+
+    const posDescPanel = document.getElementById('pos-desc-panel');
+    const posDescRole  = posDescPanel.querySelector('.pos-desc-role');
+    const posDescText  = posDescPanel.querySelector('.pos-desc-text');
+
+    function selectPosNode(btn) {
+      const key  = btn.dataset.key;
+      const data = posDescriptions[key];
+      if (!data) return;
+
+      document.querySelectorAll('.pos-node-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+
+      const inner = posDescPanel.querySelector('.pos-desc-inner');
+      inner.classList.add('transitioning');
+      setTimeout(() => {
+        posDescRole.textContent = data.name;
+        posDescText.textContent = data.text;
+        inner.classList.remove('transitioning');
+      }, 150);
+    }
+
+    document.querySelectorAll('.pos-node-btn').forEach(btn => {
+      btn.addEventListener('click', () => selectPosNode(btn));
+    });
+
+    // Default: Kaskey selected
+    const kaskeyBtn = document.querySelector('.pos-node-btn[data-key="kaskey"]');
+    if (kaskeyBtn) selectPosNode(kaskeyBtn);
+
+    // Nav shrink on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 56);
+    }, { passive: true });
+
+    // Contact form — validation + AJAX submit
+    const inquireForm   = document.getElementById('inquire-form');
+    const formSuccess   = document.getElementById('form-success');
+    const formErrBanner = document.getElementById('form-error-banner');
+    const submitBtn     = document.getElementById('submit-btn');
+
+    function validateField(inputEl, groupId, test) {
+      const group = document.getElementById(groupId);
+      const pass  = test(inputEl.value.trim());
+      group.classList.toggle('has-error', !pass);
+      return pass;
+    }
+
+    inquireForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formErrBanner.classList.remove('visible');
+
+      const nameEl      = document.getElementById('name');
+      const emailEl     = document.getElementById('email');
+      const householdEl = document.getElementById('household');
+
+      const nameOk      = validateField(nameEl,      'fg-name',      v => v.length > 0);
+      const emailOk     = validateField(emailEl,     'fg-email',      v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+      const householdOk = validateField(householdEl, 'fg-household', v => v.length > 0);
+
+      if (!nameOk || !emailOk || !householdOk) return;
+
+      submitBtn.disabled  = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        const body = new URLSearchParams(new FormData(inquireForm)).toString();
+        const res  = await fetch('/', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body,
+        });
+
+        if (res.ok) {
+          inquireForm.style.display = 'none';
+          formSuccess.classList.add('visible');
+        } else {
+          throw new Error('non-ok response');
+        }
+      } catch {
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Send inquiry';
+        formErrBanner.classList.add('visible');
+      }
+    });
+
+    // Clear error state on input
+    ['name', 'email', 'household'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        document.getElementById('fg-' + id).classList.remove('has-error');
+      });
+    });
+  </script>
+
+</body>
+</html>
