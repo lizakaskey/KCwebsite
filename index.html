@@ -353,37 +353,6 @@
       .hero-title  { font-size: clamp(2.25rem, 8vw, 3.5rem); }
     }
 
-    /* ══════════════════════════════════════════════════════════════
-       PILLARS STRIP
-    ══════════════════════════════════════════════════════════════ */
-    #pillars {
-      background: var(--forest);
-      border-bottom: 1px solid rgba(245,241,235,0.08);
-    }
-    .pillars-inner {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .pillar {
-      padding: 2.75rem 2.5rem;
-      border-right: 1px solid rgba(245,241,235,0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .pillar:last-child { border-right: none; }
-    .pillar-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.375rem;
-      font-weight: 500;
-      color: var(--cream);
-      line-height: 1.2;
-    }
-    .pillar-body {
-      font-size: 0.9375rem;
-      color: rgba(245,241,235,0.6);
-      line-height: 1.6;
-    }
 
     /* ══════════════════════════════════════════════════════════════
        SECTION SHARED STYLES
@@ -1257,11 +1226,7 @@
       .about-visual         { aspect-ratio: 16/9; max-height: 360px; }
 
       .contact-grid         { grid-template-columns: 1fr; gap: 3.5rem; }
-      .pillars-inner        { grid-template-columns: 1fr; }
-      .pillar               { border-right: none; border-bottom: 1px solid rgba(245,241,235,0.1); }
-      .pillar:last-child    { border-bottom: none; }
-
-      .nav-links            { display: none; }
+.nav-links            { display: none; }
     }
 
     @media (max-width: 600px) {
@@ -1329,6 +1294,7 @@
     </a>
     <ul class="nav-links" role="list">
       <li><a href="#process">Services</a></li>
+      <li><a href="#process">Process</a></li>
       <li><a href="#about">About</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Get in touch</a>
@@ -1367,25 +1333,7 @@
 
   </section>
 
-  <!-- ═══════════════════ PILLARS ═══════════════════ -->
-  <section id="pillars" aria-label="What sets this apart">
-    <div class="pillars-inner">
-      <div class="pillar reveal">
-        <p class="pillar-title">Proactive, not reactive</p>
-        <p class="pillar-body">We anticipate what's coming rather than waiting for you to ask.</p>
-      </div>
-      <div class="pillar reveal reveal-d1">
-        <p class="pillar-title">Systems built around you</p>
-        <p class="pillar-body">Designed around how your family actually lives, not a template.</p>
-      </div>
-      <div class="pillar reveal reveal-d2">
-        <p class="pillar-title">Small roster, by design</p>
-        <p class="pillar-body">We work with a limited number of families so we can know yours well.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ PROBLEM ═══════════════════ -->
+<!-- ═══════════════════ PROBLEM ═══════════════════ -->
   <section id="problem" aria-label="The situation">
     <div class="container">
       <div class="problem-grid">
@@ -1398,7 +1346,7 @@
             You're not behind.<br>You're just always<br><em style="color:var(--chestnut);">slightly reactive.</em>
           </h2>
           <div class="section-body reveal reveal-d2" style="margin-top: 1.75rem;">
-            <p>Most families we work with are managing demanding careers, kids, properties, and a full social life.</p>
+            <p>Most families I work with are managing demanding careers, kids, properties, and a full social life.</p>
             <p>They're not failing. They're just always a step behind the things that require foresight.</p>
             <p>The dentist appointment that gets made too late. The anniversary dinner planned the week of. The summer camp search that starts after everything is already full.</p>
             <p>They have the resources to live well. What they're missing is someone holding the full picture, and running it forward.</p>
@@ -1413,28 +1361,28 @@
     <div class="container">
       <div class="process-header">
         <span class="label process-label reveal">How it works</span>
-        <h2 class="process-headline reveal reveal-d1">Four steps to getting your life back</h2>
+        <h2 class="process-headline reveal reveal-d1">The model.</h2>
       </div>
       <div class="steps-grid">
         <div class="step reveal">
           <div class="step-num">01</div>
           <h3 class="step-title">Intake &amp; Discovery</h3>
-          <p class="step-body">We spend time understanding how your household actually operates: your priorities, your rhythms, your vendors, your recurring commitments. No generic intake forms.</p>
+          <p class="step-body">I spend time understanding how your household actually operates: your priorities, your rhythms, your vendors, your recurring commitments. No generic intake forms.</p>
         </div>
         <div class="step reveal reveal-d1">
           <div class="step-num">02</div>
           <h3 class="step-title">System Design</h3>
-          <p class="step-body">We build simple, collaborative systems around how you already live. The goal is a structure that feels effortless, not something you have to manage on top of everything else.</p>
+          <p class="step-body">I build simple, collaborative systems around how you already live. The goal is a structure that feels effortless, not something you have to manage on top of everything else.</p>
         </div>
         <div class="step reveal reveal-d2">
           <div class="step-num">03</div>
           <h3 class="step-title">Ongoing Retainer</h3>
-          <p class="step-body">We stay involved month over month, not as a project manager you check in with, but as an operational partner who already knows your life and anticipates what's coming.</p>
+          <p class="step-body">I stay involved month over month, not as a project manager you check in with, but as an operational partner who already knows your life and anticipates what's coming.</p>
         </div>
         <div class="step reveal reveal-d3">
           <div class="step-num">04</div>
           <h3 class="step-title">Standing Check-in</h3>
-          <p class="step-body">Regular structured touchpoints keep us aligned. You know what's handled. We know what's changed. Nothing waits for you to think to ask.</p>
+          <p class="step-body">Regular structured touchpoints keep me aligned. You know what's handled. I know what's changed. Nothing waits for you to think to ask.</p>
         </div>
       </div>
     </div>
@@ -1451,10 +1399,7 @@
           <span class="ws-headline-sub">without you.</span>
         </h2>
         <div class="ws-subline reveal reveal-d2">
-          <p>Not delegated. Owned. We make sure it's handled, before it ever becomes something you have to think about.</p>
-          <p>That only works because we build the foundation upfront.</p>
-          <p>We map how your household actually runs: your preferences, your routines, your recurring commitments, so we can operate independently, without needing constant input or direction.</p>
-          <p>From there, we manage your life across five core areas, all of which move off your plate entirely.</p>
+          <p>I start by mapping how your household actually runs — your preferences, routines, and recurring commitments. From there, it moves off your plate entirely.</p>
         </div>
       </div>
 
@@ -1582,7 +1527,7 @@
         <h2 class="section-headline diff-headline reveal reveal-d1" style="margin-top: 1.125rem;">
           There's a gap<br><em style="color:var(--chestnut);">no one else fills.</em>
         </h2>
-        <p class="diff-sub reveal reveal-d2">Most support is either reactive or narrowly focused. We operate across the full picture, proactively.</p>
+        <p class="diff-sub reveal reveal-d2">Most support is either reactive or narrowly focused. I operate across the full picture, proactively.</p>
       </div>
 
       <!-- ── Layout: map left + description right ── -->
@@ -1763,7 +1708,7 @@
         </div>
         <div class="ai-row reveal reveal-d4">
           <p class="ai-row-statement">Context can&#8217;t be automated.</p>
-          <p class="ai-row-support">No tool knows how your life actually works — what matters, what&#8217;s been missed before, or what needs to happen next.</p>
+          <p class="ai-row-support">No tool knows how your life actually works. That comes from paying attention over time.</p>
         </div>
         <div class="ai-row reveal reveal-d5">
           <p class="ai-row-statement">Judgment is built over time.</p>
@@ -1786,8 +1731,9 @@
             Built for this.<br><em>By design.</em>
           </h2>
           <div class="about-body reveal reveal-d2">
-            <p>Liza Kaskey is the founder of Kaskey Consulting. With a background in investment banking, she spent years operating in high-stakes environments where precision, coordination, and disciplined execution were essential.</p>
-            <p>She established the firm to bring institutional-grade structure to the management of modern family life. Through thoughtful systems and steady oversight, she helps households operate with clarity and continuity.</p>
+            <p>My background is investment banking. I spent years operating in high-stakes environments where nothing could fall through the cracks and everything had to run ahead of schedule.</p>
+            <p>At some point I realized the families around me needed exactly that — and had nowhere to turn for it. Not a personal assistant. Not a house manager. Something in between, and more than both.</p>
+            <p>I work with a small number of families because this only works if I actually know your life. The calendar, the vendors, the friend whose birthday always sneaks up on you. That is the job. I take it seriously.</p>
           </div>
         </div>
       </div>
@@ -1797,8 +1743,7 @@
   <!-- ═══════════════════ MISSION ═══════════════════ -->
   <section id="quote" aria-label="Mission statement">
     <div class="container">
-      <p class="quote-label reveal">Mission statement</p>
-      <p class="quote-text reveal reveal-d1">
+      <p class="quote-text reveal">
         To hold the full picture of your family's life and run it forward — bringing structure, clarity, and proactive execution to everything behind the scenes.
       </p>
     </div>
@@ -1815,8 +1760,7 @@
             What would it feel like if nothing had to sit on your mind?
           </h2>
           <p class="contact-body reveal reveal-d2">
-            We work with a small number of families at a time, by design.<br>
-            If this feels aligned, share a bit about your household and what you're looking for.
+            I work with a small number of families at a time, by design. If this feels aligned, share a bit about your household and what you are looking for.
           </p>
           <a href="mailto:inquiries@kaskeyconsulting.co" class="contact-email reveal reveal-d3">
             inquiries@kaskeyconsulting.co
@@ -1859,7 +1803,7 @@
           </form>
           <div class="form-success" id="form-success">
             <p class="form-success-title">Thank you.</p>
-            <p class="form-success-body">We'll be in touch personally within 48 hours.</p>
+            <p class="form-success-body">I'll be in touch personally within 48 hours.</p>
           </div>
         </div>
 
@@ -2006,7 +1950,7 @@
 
     // Positioning map — competitor node click-to-expand
     const posDescriptions = {
-      kaskey:    { name: 'Kaskey Consulting', text: 'The proactive Chief of Staff for your family. We hold the full picture — managing the life admin that high-achieving families never have time to stay ahead of, on an ongoing retainer basis.' },
+      kaskey:    { name: 'Kaskey Consulting', text: 'The proactive Chief of Staff for your family. I hold the full picture — managing the life admin that high-achieving families never have time to stay ahead of, on an ongoing retainer basis.' },
       estate:       { name: 'Estate manager', text: 'Manages properties, staff, and household operations at significant scale. Built for households with full-time infrastructure needs. The complexity they\'re designed for is different — and typically requires a much larger dedicated team.' },
       house:        { name: 'House manager', text: 'Manages the physical home — vendors, maintenance, household staff. Strong within that lane, but the lane ends at your front door. Doesn\'t touch calendars, social obligations, travel, or anything that lives outside the four walls.' },
       'corporate-ea': { name: 'Corporate EA', text: 'Trained for the corporate environment — inbox, scheduling, travel booking for one executive\'s professional life. Reactive by default. Built for a company, not a household. You direct them; they execute.' },
