@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git config *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "Bash(cp \"c:/Users/eliza/Desktop/Website/Website Images/Presentation1.jpg\" \"c:/Users/eliza/Desktop/Website/images/slide-1.jpg\")",
+      "Bash(cp \"c:/Users/eliza/Desktop/Website/Website Images/Presentation12.jpg\" \"c:/Users/eliza/Desktop/Website/images/slide-2.jpg\")",
+      "Bash(cp \"c:/Users/eliza/Desktop/Website/Website Images/Presentation13.jpg\" \"c:/Users/eliza/Desktop/Website/images/slide-3.jpg\")",
+      "Bash(cp \"c:/Users/eliza/Desktop/Website/Website Images/Presentation14.jpg\" \"c:/Users/eliza/Desktop/Website/images/slide-4.jpg\")",
+      "Bash(cp \"c:/Users/eliza/Desktop/Website/Website Images/Presentation15.jpg\" \"c:/Users/eliza/Desktop/Website/images/slide-5.jpg\")"
+    ]
+  }
+}

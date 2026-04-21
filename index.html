@@ -379,11 +379,11 @@
     ══════════════════════════════════════════════════════════════ */
     #problem {
       background: var(--cream);
-      padding: var(--sp-xl) 0;
+      padding: 2rem 0;
     }
     .problem-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 5.5rem;
       align-items: center;
     }
@@ -745,6 +745,168 @@
       .pos-mob-card.kaskey .pos-name { color: var(--cream); }
       .pos-mob-card.kaskey .pos-sub  { color: rgba(245,241,235,0.65); }
       .pos-mob-card.kaskey .pos-icon { color: var(--cream); }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       OPERATING SYSTEM CAROUSEL
+    ══════════════════════════════════════════════════════════════ */
+    #os-carousel-section {
+      background: var(--linen);
+      padding: var(--sp-xl) 0;
+    }
+
+    .os-grid {
+      display: grid;
+      grid-template-columns: 65% 35%;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    /* Left: carousel */
+    .os-carousel-wrap {
+      position: relative;
+    }
+
+    .os-slides {
+      position: relative;
+      width: 100%;
+      max-height: 600px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #F5F1EB;
+    }
+
+    .os-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F5F1EB;
+    }
+
+    .os-slide.active {
+      opacity: 1;
+    }
+
+    /* Invisible spacer slide drives container height from the tallest image */
+    .os-slide-sizer {
+      position: relative;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .os-slide-sizer img,
+    .os-slide img {
+      width: 100%;
+      height: auto;
+      max-height: 600px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Arrow buttons */
+    .os-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: var(--taupe);
+      z-index: 10;
+      transition: color 0.2s ease;
+      line-height: 0;
+    }
+
+    .os-arrow:hover,
+    .os-arrow:focus-visible { color: var(--forest); }
+    .os-arrow:focus-visible  { outline: 2px solid var(--forest); outline-offset: 2px; border-radius: 3px; }
+    .os-arrow:active         { color: var(--espresso); }
+
+    .os-arrow--prev { left: -2.25rem; }
+    .os-arrow--next { right: -2.25rem; }
+
+    .os-arrow svg { width: 20px; height: 20px; }
+
+    /* Dots */
+    .os-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .os-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(60, 74, 64, 0.25);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.25s ease;
+    }
+
+    .os-dot.active { background: var(--forest); }
+    .os-dot:hover  { background: rgba(60, 74, 64, 0.55); }
+    .os-dot.active:hover { background: var(--forest); }
+
+    /* Right: text */
+    .os-text { padding-left: 0.5rem; }
+
+    .os-label {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 1.25rem;
+    }
+
+    .os-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.5rem, 4vw, 3.75rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--espresso);
+    }
+
+    .os-body {
+      font-family: 'Figtree', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--taupe);
+      margin-top: 1.25rem;
+    }
+
+    .os-tagline {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.8125rem;
+      line-height: 1.65;
+      color: var(--taupe);
+      margin-top: 1.125rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(156, 142, 123, 0.25);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .os-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .os-text { padding-left: 0; order: -1; }
+      .os-carousel-wrap { order: 1; }
+
+      .os-arrow--prev { left: -1.5rem; }
+      .os-arrow--next { right: -1.5rem; }
     }
 
     /* ══════════════════════════════════════════════════════════════
@@ -1329,18 +1491,18 @@
   <section id="problem" aria-label="The situation">
     <div class="container">
       <div class="problem-grid">
-        <div class="problem-visual reveal">
-          <img src="images/mary-skrynnikova-x1BnEh4k-S8-unsplash.jpg" alt="" aria-hidden="true" />
-        </div>
-        <div class="problem-content">
+        <div class="problem-content" style="text-align: center;">
           <span class="label section-label problem-label reveal">The situation</span>
           <h2 class="section-headline reveal reveal-d1">
-            You're not behind.<br>You're just always<br><em style="color:var(--chestnut);">slightly reactive.</em>
+            You're not behind. You're just always<br><em style="color:var(--chestnut);">slightly reactive.</em>
           </h2>
           <div class="section-body reveal reveal-d2" style="margin-top: 1.75rem;">
-            <p>Most families we work with are managing demanding careers, kids, properties, and a full social life. They're not failing. They're just always a step behind the things that require foresight.</p>
-            <p>The dentist appointment that gets made too late. The anniversary dinner planned the week of. The summer camp search that starts after everything is already full.</p>
-            <p>They have the resources to live well. What they're missing is someone holding the full picture, and running it forward.</p>
+            <p style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--espresso);">
+              65% of working parents say they're burning out — not from work. From running their lives.
+            </p>
+            <p style="font-family: 'Figtree', sans-serif; font-size: 1rem; color: var(--taupe); margin-top: 1.5rem;">
+              There's a better way to run yours.
+            </p>
           </div>
         </div>
       </div>
@@ -1379,6 +1541,66 @@
     </div>
   </section>
 
+  <!-- ═══════════════════ OPERATING SYSTEM CAROUSEL ═══════════════════ -->
+  <section id="os-carousel-section" aria-label="A home for everything. A system for running it.">
+    <div class="container">
+      <div class="os-grid">
+
+        <!-- Left: image carousel -->
+        <div class="os-carousel-wrap reveal">
+          <div class="os-slides" id="osSlides">
+            <div class="os-slide active" data-index="0">
+              <img src="images/slide-1.jpg" alt="Credentials — identity documents and loyalty programs" loading="lazy" />
+            </div>
+            <div class="os-slide" data-index="1">
+              <img src="images/slide-2.jpg" alt="Calendar — quarterly reviews and family commitments" loading="lazy" />
+            </div>
+            <div class="os-slide" data-index="2">
+              <img src="images/slide-3.jpg" alt="Contacts and property — vendors and property details" loading="lazy" />
+            </div>
+            <div class="os-slide" data-index="3">
+              <img src="images/slide-4.jpg" alt="Preferences — travel rules and gifting budgets" loading="lazy" />
+            </div>
+            <div class="os-slide" data-index="4">
+              <img src="images/slide-5.jpg" alt="Task tracker — every open item tracked and owned" loading="lazy" />
+            </div>
+            <div class="os-slide-sizer" aria-hidden="true">
+              <img src="images/slide-1.jpg" alt="" />
+            </div>
+          </div>
+
+          <button class="os-arrow os-arrow--prev" aria-label="Previous slide" id="osPrev">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="13 4 7 10 13 16" />
+            </svg>
+          </button>
+          <button class="os-arrow os-arrow--next" aria-label="Next slide" id="osNext">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="7 4 13 10 7 16" />
+            </svg>
+          </button>
+
+          <div class="os-dots" id="osDots" role="tablist" aria-label="Slide indicators">
+            <button class="os-dot active" role="tab" aria-selected="true"  aria-label="Slide 1" data-slide="0"></button>
+            <button class="os-dot"        role="tab" aria-selected="false" aria-label="Slide 2" data-slide="1"></button>
+            <button class="os-dot"        role="tab" aria-selected="false" aria-label="Slide 3" data-slide="2"></button>
+            <button class="os-dot"        role="tab" aria-selected="false" aria-label="Slide 4" data-slide="3"></button>
+            <button class="os-dot"        role="tab" aria-selected="false" aria-label="Slide 5" data-slide="4"></button>
+          </div>
+          <p class="os-tagline">We adapt to how your family already works. Our preferred tools include Notion, Google Calendar, Google Drive, and 1Password — but the right system is the one that actually gets used.</p>
+        </div>
+
+        <!-- Right: static text + dynamic descriptors -->
+        <div class="os-text">
+          <p class="os-label reveal">Behind the scenes</p>
+          <h2 class="os-headline reveal reveal-d1">A home for everything.<br><span class="ws-headline-sub">A system for running it.</span></h2>
+          <p class="os-body reveal reveal-d2">Every client engagement is built on a shared operating system — preferences documented, credentials accessible, vendors mapped, tasks tracked, and a calendar that keeps everyone aligned.<br><br>We build it together in the first few weeks. Then we run it — so you never have to think about it again.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════════ WORKSTREAMS ═══════════════════ -->
   <section id="workstreams" aria-label="What moves off your plate">
     <div class="container">
@@ -1389,9 +1611,6 @@
           Built to run<br>
           <span class="ws-headline-sub">without you.</span>
         </h2>
-        <div class="ws-subline reveal reveal-d2">
-          <p>We start by mapping how your household actually runs — your preferences, routines, and recurring commitments. From there, it moves off your plate entirely.</p>
-        </div>
       </div>
 
       <div class="ws-tab-row reveal reveal-d3" role="tablist" aria-label="Service areas">
@@ -1901,6 +2120,55 @@
 
       stemEl.textContent = cycles[0].stem;
       setTimeout(tick, 800);
+    }());
+  </script>
+
+  <script>
+    // Operating system carousel
+    (function () {
+      const TOTAL = 5;
+      const INTERVAL = 5000;
+
+      const slides      = document.querySelectorAll('.os-slide');
+      const dots        = document.querySelectorAll('#osDots .os-dot');
+      const prevBtn     = document.getElementById('osPrev');
+      const nextBtn     = document.getElementById('osNext');
+      const wrap        = document.getElementById('osSlides');
+
+      let current = 0;
+      let timer;
+      let paused = false;
+
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        dots[current].setAttribute('aria-selected', 'false');
+
+        current = (idx + TOTAL) % TOTAL;
+
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        dots[current].setAttribute('aria-selected', 'true');
+      }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(function () {
+          if (!paused) goTo(current + 1);
+        }, INTERVAL);
+      }
+
+      prevBtn.addEventListener('click', function () { goTo(current - 1); startTimer(); });
+      nextBtn.addEventListener('click', function () { goTo(current + 1); startTimer(); });
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () { goTo(parseInt(dot.dataset.slide, 10)); startTimer(); });
+      });
+
+      wrap.addEventListener('mouseenter', function () { paused = true; });
+      wrap.addEventListener('mouseleave', function () { paused = false; });
+
+      startTimer();
     }());
   </script>
 
