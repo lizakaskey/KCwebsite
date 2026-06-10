@@ -725,6 +725,21 @@
     .btn-submit:hover         { background: transparent; color: var(--forest); }
     .btn-submit:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
+    .form-direct-email {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 0.875rem;
+      color: var(--taupe);
+      margin-top: 1.75rem;
+      line-height: 1.6;
+    }
+    .form-direct-email a {
+      color: var(--taupe);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .form-direct-email a:hover { color: var(--chestnut); }
+
     .form-field-error {
       font-size: 0.75rem;
       color: #b94444;
@@ -868,18 +883,10 @@
   </section>
 
   <!-- ═══════════════════ APPROACH ═══════════════════ -->
-  <section id="approach" aria-label="Our approach">
-    <div class="approach-inner">
-      <span class="approach-label reveal">OUR APPROACH</span>
-      <h2 class="approach-headline reveal reveal-d1">Built for complexity</h2>
-      <p class="approach-body reveal reveal-d2">Kaskey Consulting brings the discretion, rigor, and discipline of high-performance corporate environments to the management of modern family life.</p>
-    </div>
-  </section>
-
   <!-- ═══════════════════ ENGAGEMENT ═══════════════════ -->
-  <section id="engagement" aria-label="How an engagement unfolds">
+  <section id="approach" aria-label="Our approach">
     <div class="engagement-inner">
-      <span class="engagement-label reveal">THE WORK</span>
+      <span class="engagement-label reveal">OUR APPROACH</span>
       <h2 class="engagement-headline reveal reveal-d1">Foundation, then partnership</h2>
       <div class="engagement-body">
         <p class="reveal reveal-d2">Every engagement begins with a foundation period that is focused, intensive, and tailored to the household. We map the operating picture, build the systems, and establish the rhythms that will run the partnership forward.</p>
@@ -969,6 +976,7 @@
         </div>
 
         <button type="submit" class="btn-submit" id="submit-btn">Send inquiry</button>
+        <p class="form-direct-email">Prefer email? Reach us directly at <a href="mailto:inquiries@kaskeyconsulting.co">inquiries@kaskeyconsulting.co</a></p>
         <div class="form-error-banner" id="form-error-banner">
           Something went wrong. Please try again or email inquiries@kaskeyconsulting.co directly.
         </div>
