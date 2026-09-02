@@ -143,3 +143,69 @@ Define all colors as CSS variables at the top of every file. Never use default T
 - This is not household help — every word should reflect operational partnership
 - The systems piece matters — built collaboratively, fits how the family actually lives
 - Every design decision should ask: would a discerning, time-starved New York family trust this instantly?
+
+---
+
+## Typography and Layout Rules
+
+These are global. They apply to every page and every new section.
+
+### Rule 1 — Minimum type sizes
+
+No text may fall below these.
+
+| Role | Minimum |
+|---|---|
+| Body copy and paragraphs | `1.125rem` (18px) |
+| Card blurbs, captions, small text | `1rem` (16px), never lower |
+| Eyebrow and label text | `0.8125rem`, uppercase and tracked |
+| Form labels and inputs | `1rem` |
+| Nav links | `0.8125rem` |
+
+Body line-height `1.65`. Small text line-height `1.55`.
+
+### Rule 2 — Weight floor
+
+Weight 300 is display-only, permitted for headings at `2rem` and above.
+All body, blurb, label and caption text is 400 minimum.
+On dark grounds (`--forest`, `#1a1a1a`, `--espresso`) body text steps up to 500.
+Light weight on a dark ground is the single biggest reason type reads thin.
+
+### Rule 3 — Blocks, not lines
+
+Hairline dividers may not be the primary structure for any group of items.
+Parallel content gets surface blocks:
+
+- each item has its own background fill and its own padding
+- padding `2rem` minimum, `2.5rem` preferred
+- gap between blocks `1.25rem` minimum
+- sharp corners, no border-radius
+
+On light sections, blocks are `--cream` on `--linen`.
+On dark sections, blocks are a lighter step of the same ground, derived from
+existing tokens at low alpha. `rgba(255,255,255,0.04)` over `--forest` is the
+established value; do not exceed 0.04 there, because 0.05 drops body copy to
+4.49:1 and fails AA.
+
+Hairlines remain valid as accents. Just never as the only structure.
+
+### Rule 4 — Measure
+
+Body paragraphs cap at `68ch`. Card and block copy caps at `46ch`.
+Nothing runs the full width of the 1160px container as a single paragraph.
+
+### Rule 5 — Vertical rhythm
+
+Space belongs between groups, not inside them. Where a section has generous
+whitespace but cramped small text, the fix is bigger text, not more space.
+Do not add padding to compensate.
+
+### Known exception
+
+`--taupe` (`#9C8E7B`) is the caption colour on dark grounds only. On `--cream`
+it measures 2.84:1 and on `--linen` 2.51:1, both failing WCAG AA. On light
+grounds use `--charcoal` at 0.72 alpha instead.
+
+Gold eyebrow labels on `--forest` cannot reach AA at any opacity: full
+`--gold` is 4.10:1 against a 4.5 requirement. Full opacity is the current
+compromise.
