@@ -406,6 +406,94 @@
     }
 
     /* ══════════════════════════════════════════════════════
+       WHAT WE RUN
+    ══════════════════════════════════════════════════════ */
+    #work {
+      background: var(--linen);
+      padding: var(--sp-xl) 0;
+      scroll-margin-top: var(--nav-h);
+    }
+    .work-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .work-label {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.6875rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: rgba(43,43,43,0.72);
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+    .work-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+    .work-subhead {
+      font-family: 'Figtree', sans-serif;
+      font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+      color: rgba(43,43,43,0.72);
+      line-height: 1.7;
+      max-width: 60ch;
+      margin-bottom: 2.25rem;
+    }
+
+    /* Teaser grid — the .principles-grid pattern, recoloured for a light ground. */
+    .work-teaser-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .work-teaser-item {
+      padding: 1.75rem 2.5rem 1.875rem;
+      border-top: 1px solid rgba(139,94,60,0.30);
+      border-left: 1px solid rgba(139,94,60,0.15);
+    }
+    .work-teaser-item:nth-child(3n+1) { border-left: none; }
+
+    .work-teaser-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4375rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--charcoal);
+    }
+
+    /* Inline text link, on the .form-direct-email a treatment. */
+    .work-more {
+      display: inline-block;
+      margin-top: 2.25rem;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.9375rem;
+      color: var(--charcoal);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    .work-more:hover         { color: var(--espresso); }
+    .work-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .work-more:active        { color: var(--chestnut); }
+
+    @media (max-width: 768px) {
+      .work-teaser-grid { grid-template-columns: 1fr; }
+      .work-teaser-item {
+        border-left: none;
+        padding: 1.5rem 0;
+      }
+    }
+    @media (max-width: 600px) {
+      .work-inner { padding: 0 1.25rem; }
+    }
+
+    /* ══════════════════════════════════════════════════════
        APPROACH
     ══════════════════════════════════════════════════════ */
     #approach {
@@ -842,6 +930,7 @@
       <img src="3.png" alt="Kaskey Consulting" />
     </a>
     <ul class="nav-links" role="list">
+      <li><a href="work.html">The Work</a></li>
       <li><a href="#approach">Approach</a></li>
       <li><a href="#about">About</a></li>
     </ul>
@@ -879,6 +968,27 @@
       <div class="thesis-img-col reveal reveal-d1">
         <img src="IMG_1792.JPG" alt="Central Park, New York" />
       </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ WHAT WE RUN ═══════════════════ -->
+
+  <section id="work" aria-label="What we run">
+    <div class="work-inner">
+      <span class="work-label reveal">THE WORK</span>
+      <h2 class="work-headline reveal reveal-d1">What we run</h2>
+      <p class="work-subhead reveal reveal-d1">A sample of the work. The full scope is set by your household, not this list.</p>
+
+      <div class="work-teaser-grid reveal reveal-d2">
+        <div class="work-teaser-item"><h3 class="work-teaser-name">Calendar &amp; Time</h3></div>
+        <div class="work-teaser-item"><h3 class="work-teaser-name">Travel &amp; Logistics</h3></div>
+        <div class="work-teaser-item"><h3 class="work-teaser-name">Household &amp; Vendors</h3></div>
+        <div class="work-teaser-item"><h3 class="work-teaser-name">Gifts &amp; Occasions</h3></div>
+        <div class="work-teaser-item"><h3 class="work-teaser-name">Research &amp; Decision Support</h3></div>
+        <div class="work-teaser-item"><h3 class="work-teaser-name">Projects &amp; Transitions</h3></div>
+      </div>
+
+      <a href="work.html" class="work-more reveal reveal-d3">See the full scope</a>
     </div>
   </section>
 
