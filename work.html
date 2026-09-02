@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaskey Consulting | What We Run</title>
+  <meta name="description" content="The scope of work Kaskey Consulting runs for complex households, across calendar and time, travel and logistics, household and vendors, gifts and occasions, research, and major projects." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Color tokens ── */
+    :root {
+      --cream:    #F5F1EB;
+      --linen:    #EAE3D6;
+      --charcoal: #2B2B2B;
+      --espresso: #452F1E;
+      --chestnut: #8B5E3C;
+      --forest:   #3C4A40;
+      --gold:     #C0A97A;
+      --taupe:    #9C8E7B;
+
+      --sp-xl:  6rem;
+      --sp-lg:  4rem;
+      --nav-h:  72px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'Figtree', sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 900;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.09s; }
+    .reveal-d2 { transition-delay: 0.20s; }
+    .reveal-d3 { transition-delay: 0.33s; }
+
+    /* ── Layout ── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2.5rem; }
+
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      padding: 1.375rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--forest);
+      transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav.scrolled { padding: 0.9rem 2.5rem; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo img { height: 30px; width: auto; display: block; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      font-weight: 400;
+      color: rgba(245,241,235,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover         { color: var(--cream); }
+    .nav-links a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    .nav-cta {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.6875rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--forest);
+      background: var(--cream);
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      border: 1px solid var(--cream);
+      transition: background 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                  color 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-cta:hover         { background: transparent; color: var(--cream); }
+    .nav-cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .nav-cta:active        { background: rgba(245,241,235,0.85); color: var(--forest); }
+
+    @media (max-width: 960px) { .nav-links { display: none; } }
+
+    /* Current page marker. Reuses the existing hover colour; no new value. */
+    .nav-links a[aria-current="page"] { color: var(--cream); }
+
+    /* ══════════════════════════════════════════════════════
+       WHAT WE RUN
+    ══════════════════════════════════════════════════════ */
+    #work {
+      background: var(--linen);
+      padding: var(--sp-xl) 0;
+      scroll-margin-top: var(--nav-h);
+    }
+    .work-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .work-label {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.6875rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: rgba(43,43,43,0.72);
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+    .work-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+    .work-subhead {
+      font-family: 'Figtree', sans-serif;
+      font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+      color: rgba(43,43,43,0.72);
+      line-height: 1.7;
+      max-width: 60ch;
+      margin-bottom: 2.25rem;
+    }
+
+    /* Filter row — text tabs on the .nav-links a treatment */
+    .work-filters {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 2.25rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 2.25rem;
+    }
+    .work-filters::-webkit-scrollbar { display: none; }
+
+    .work-tab {
+      position: relative;
+      flex: 0 0 auto;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      font-weight: 400;
+      line-height: 1.7;
+      padding: 0.75rem 0;
+      color: rgba(43,43,43,0.72);
+      background: none;
+      border: none;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .work-tab:hover         { color: var(--charcoal); }
+    .work-tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .work-tab:active        { color: var(--espresso); }
+
+    /* Underline carries the selected state, so it never reads on color alone. */
+    .work-tab::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(0.75rem - 4px);
+      height: 1px;
+      background: var(--chestnut);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .work-tab[aria-selected="true"]        { color: var(--charcoal); font-weight: 500; }
+    .work-tab[aria-selected="true"]::after { transform: scaleX(1); }
+
+    /* Grid */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      list-style: none;
+    }
+
+    .work-card {
+      position: relative;
+      background: var(--cream);
+      padding: 2rem;
+      box-shadow: 0 1px 2px rgba(69,47,30,0.04),
+                  0 8px 24px rgba(69,47,30,0.06);
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    /* Deeper shadow lives on a pseudo-element so only opacity animates. */
+    .work-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 2px 4px rgba(69,47,30,0.05),
+                  0 16px 40px rgba(69,47,30,0.10);
+      transition: opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .work-card:hover        { transform: scale(1.03); z-index: 1; }
+    .work-card:hover::after { opacity: 1; }
+    .work-card[hidden]      { display: none; }
+
+    .work-card-icon {
+      width: 24px;
+      height: 24px;
+      display: block;
+      color: var(--chestnut);
+      margin-bottom: 1.25rem;
+    }
+    .work-card-title {
+      font-family: 'Figtree', sans-serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+    .work-card-blurb {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgba(43,43,43,0.72);
+    }
+
+    @media (max-width: 960px) {
+      .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .work-inner   { padding: 0 1.25rem; }
+      .work-grid    { grid-template-columns: minmax(0, 1fr); }
+      .work-filters {
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+        padding: 0 1.25rem;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .work-card        { transition: none; }
+      .work-card:hover  { transform: none; }
+    }
+
+    /* This section is the first content on this page, so it also clears the
+       fixed nav. index.html does not need this because #thesis sits above it. */
+    #work { padding-top: calc(var(--nav-h) + var(--sp-xl)); }
+
+    footer {
+      background: var(--espresso);
+      padding: 2.5rem 2.5rem 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(245,241,235,0.1);
+    }
+
+    .footer-wordmark {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,241,235,0.45);
+      font-weight: 400;
+    }
+
+    .footer-icons {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .footer-icons a {
+      display: flex;
+      align-items: center;
+      color: rgba(245,241,235,0.45);
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .footer-icons a:hover         { color: var(--cream); }
+    .footer-icons a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    .footer-copy {
+      font-size: 0.6875rem;
+      color: rgba(245,241,235,0.28);
+      text-align: center;
+      letter-spacing: 0.06em;
+      padding: 0.875rem 0 1.25rem;
+    }
+
+    /* ── Mobile global ── */
+    @media (max-width: 600px) {
+      .container { padding: 0 1.25rem; }
+      footer { padding: 2rem 1.25rem 0; }
+      .footer-inner { flex-direction: column; gap: 1.25rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav" id="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav-logo" aria-label="Kaskey Consulting, home">
+      <img src="3.png" alt="Kaskey Consulting" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="work.html" aria-current="page">The Work</a></li>
+      <li><a href="index.html#approach">Approach</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Inquire</a>
+  </nav>
+
+  <!-- Icon sprite. Stroke properties live on each symbol so <use> inherits them. -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs>
+      <symbol id="wi-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="16"/><path d="M3 10h18M8 3v4M16 3v4"/>
+      </symbol>
+      <symbol id="wi-travel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 3 3 9.5l7.5 4L14.5 21 21 3z"/><path d="M21 3l-10.5 10.5"/>
+      </symbol>
+      <symbol id="wi-household" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6.5h5V21"/>
+      </symbol>
+      <symbol id="wi-gifts" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="9" width="18" height="12"/><path d="M3 13.5h18M12 9v12"/>
+        <path d="M12 9C12 9 10.2 4.2 7.8 5.4 5.9 6.4 7.4 9 12 9z"/><path d="M12 9c0 0 1.8-4.8 4.2-3.6C18.1 6.4 16.6 9 12 9z"/>
+      </symbol>
+      <symbol id="wi-research" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 3H6v18h12V8z"/><path d="M13 3v5h5"/><path d="M9 14.5l2.5 2.5 4.5-5"/>
+      </symbol>
+      <symbol id="wi-projects" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="16"/><path d="M10 4v7M10 15v5M10 11h11"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <section id="work" aria-label="What we run">
+    <div class="work-inner">
+      <span class="work-label reveal">THE WORK</span>
+      <h2 class="work-headline reveal reveal-d1">What we run</h2>
+      <p class="work-subhead reveal reveal-d1">A sample of the work. The full scope is set by your household, not this list.</p>
+
+      <div class="work-filters reveal reveal-d2" role="tablist" aria-label="Filter by category" data-work-tabs>
+        <button type="button" class="work-tab" id="wt-all"       role="tab" aria-controls="work-panel" aria-selected="true"  tabindex="0"  data-filter="all">All</button>
+        <button type="button" class="work-tab" id="wt-calendar"  role="tab" aria-controls="work-panel" aria-selected="false" tabindex="-1" data-filter="calendar">Calendar</button>
+        <button type="button" class="work-tab" id="wt-travel"    role="tab" aria-controls="work-panel" aria-selected="false" tabindex="-1" data-filter="travel">Travel</button>
+        <button type="button" class="work-tab" id="wt-household" role="tab" aria-controls="work-panel" aria-selected="false" tabindex="-1" data-filter="household">Household</button>
+        <button type="button" class="work-tab" id="wt-gifts"     role="tab" aria-controls="work-panel" aria-selected="false" tabindex="-1" data-filter="gifts">Gifts</button>
+        <button type="button" class="work-tab" id="wt-research"  role="tab" aria-controls="work-panel" aria-selected="false" tabindex="-1" data-filter="research">Research</button>
+        <button type="button" class="work-tab" id="wt-projects"  role="tab" aria-controls="work-panel" aria-selected="false" tabindex="-1" data-filter="projects">Projects</button>
+      </div>
+
+      <div id="work-panel" role="tabpanel" tabindex="0" aria-live="polite" aria-labelledby="wt-all" class="reveal reveal-d3">
+        <ul class="work-grid" data-work-grid>
+          <li class="work-card" data-category="calendar">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-calendar"/></svg>
+            <h3 class="work-card-title">The Week Ahead</h3>
+            <p class="work-card-blurb">A standing session so the week gets built, not absorbed.</p>
+          </li>
+          <li class="work-card" data-category="calendar">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-calendar"/></svg>
+            <h3 class="work-card-title">One Shared View</h3>
+            <p class="work-card-blurb">Both principals working from the same calendar.</p>
+          </li>
+          <li class="work-card" data-category="calendar">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-calendar"/></svg>
+            <h3 class="work-card-title">The Year Mapped</h3>
+            <p class="work-card-blurb">School, board, travel, and family dates set a year out.</p>
+          </li>
+          <li class="work-card" data-category="calendar">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-calendar"/></svg>
+            <h3 class="work-card-title">Season of Life</h3>
+            <p class="work-card-blurb">Planning around the chapter you are actually in.</p>
+          </li>
+          <li class="work-card" data-category="calendar">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-calendar"/></svg>
+            <h3 class="work-card-title">Multi-Year Planning</h3>
+            <p class="work-card-blurb">Three to five years out, on paper and revisited.</p>
+          </li>
+          <li class="work-card" data-category="calendar">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-calendar"/></svg>
+            <h3 class="work-card-title">Standing Cycles</h3>
+            <p class="work-card-blurb">Recurring obligations on a schedule instead of in someone's memory.</p>
+          </li>
+          <li class="work-card" data-category="calendar">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-calendar"/></svg>
+            <h3 class="work-card-title">School Year Setup</h3>
+            <p class="work-card-blurb">Deadlines, forms, and calendars handled before September.</p>
+          </li>
+          <li class="work-card" data-category="calendar">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-calendar"/></svg>
+            <h3 class="work-card-title">Staff Coverage</h3>
+            <p class="work-card-blurb">Schedules and time off across household staff.</p>
+          </li>
+          <li class="work-card" data-category="calendar">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-calendar"/></svg>
+            <h3 class="work-card-title">Office and Household Sync</h3>
+            <p class="work-card-blurb">Your assistant and your household working from one calendar.</p>
+          </li>
+          <li class="work-card" data-category="travel">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-travel"/></svg>
+            <h3 class="work-card-title">Private Aviation</h3>
+            <p class="work-card-blurb">Charter sourcing, catering, and ground transport on both ends.</p>
+          </li>
+          <li class="work-card" data-category="travel">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-travel"/></svg>
+            <h3 class="work-card-title">Full Itineraries</h3>
+            <p class="work-card-blurb">One document holding every confirmation and detail.</p>
+          </li>
+          <li class="work-card" data-category="travel">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-travel"/></svg>
+            <h3 class="work-card-title">Trip Standards</h3>
+            <p class="work-card-blurb">Preferences, seats, and hotels held so every trip starts from a known baseline.</p>
+          </li>
+          <li class="work-card" data-category="travel">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-travel"/></svg>
+            <h3 class="work-card-title">International Complexity</h3>
+            <p class="work-card-blurb">Visas, permits, and documents sorted well ahead.</p>
+          </li>
+          <li class="work-card" data-category="travel">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-travel"/></svg>
+            <h3 class="work-card-title">Villas and Charters</h3>
+            <p class="work-card-blurb">Property and yacht sourcing with terms reviewed before signing.</p>
+          </li>
+          <li class="work-card" data-category="travel">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-travel"/></svg>
+            <h3 class="work-card-title">Group Travel</h3>
+            <p class="work-card-blurb">Several families, several flights, one plan.</p>
+          </li>
+          <li class="work-card" data-category="travel">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-travel"/></svg>
+            <h3 class="work-card-title">Family Travel</h3>
+            <p class="work-card-blurb">Children, staff, and pets moving with you without a separate plan.</p>
+          </li>
+          <li class="work-card" data-category="travel">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-travel"/></svg>
+            <h3 class="work-card-title">House While Away</h3>
+            <p class="work-card-blurb">Coverage, staff, and security handled while you are gone.</p>
+          </li>
+          <li class="work-card" data-category="travel">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-travel"/></svg>
+            <h3 class="work-card-title">Trip Close-Out</h3>
+            <p class="work-card-blurb">Receipts reconciled and follow-ups finished on return.</p>
+          </li>
+          <li class="work-card" data-category="household">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-household"/></svg>
+            <h3 class="work-card-title">Maintenance Cycles</h3>
+            <p class="work-card-blurb">Every property on a standing service schedule.</p>
+          </li>
+          <li class="work-card" data-category="household">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-household"/></svg>
+            <h3 class="work-card-title">Vendor Registry</h3>
+            <p class="work-card-blurb">Every trade and service in one current place.</p>
+          </li>
+          <li class="work-card" data-category="household">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-household"/></svg>
+            <h3 class="work-card-title">Household Staffing</h3>
+            <p class="work-card-blurb">Sourcing, screening, and structuring the roles properly.</p>
+          </li>
+          <li class="work-card" data-category="household">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-household"/></svg>
+            <h3 class="work-card-title">Seasonal Open and Close</h3>
+            <p class="work-card-blurb">Second homes opened and closed on time.</p>
+          </li>
+          <li class="work-card" data-category="household">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-household"/></svg>
+            <h3 class="work-card-title">Property Records</h3>
+            <p class="work-card-blurb">Warranties, manuals, and service history held in one system.</p>
+          </li>
+          <li class="work-card" data-category="household">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-household"/></svg>
+            <h3 class="work-card-title">The Household Manual</h3>
+            <p class="work-card-blurb">How the house runs, documented, so anyone new can step in.</p>
+          </li>
+          <li class="work-card" data-category="household">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-household"/></svg>
+            <h3 class="work-card-title">Smart Home and AV</h3>
+            <p class="work-card-blurb">Systems specified, installed, and documented.</p>
+          </li>
+          <li class="work-card" data-category="household">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-household"/></svg>
+            <h3 class="work-card-title">Contract Renewals</h3>
+            <p class="work-card-blurb">Service agreements tracked and renegotiated before they auto-renew.</p>
+          </li>
+          <li class="work-card" data-category="household">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-household"/></svg>
+            <h3 class="work-card-title">Grounds and Landscape</h3>
+            <p class="work-card-blurb">Irrigation, planting, and seasonal work on a set schedule.</p>
+          </li>
+          <li class="work-card" data-category="gifts">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-gifts"/></svg>
+            <h3 class="work-card-title">Parties</h3>
+            <p class="work-card-blurb">Guest list through vendor coordination through the day itself.</p>
+          </li>
+          <li class="work-card" data-category="gifts">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-gifts"/></svg>
+            <h3 class="work-card-title">Milestone Events</h3>
+            <p class="work-card-blurb">Significant birthdays, anniversaries, and celebrations.</p>
+          </li>
+          <li class="work-card" data-category="gifts">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-gifts"/></svg>
+            <h3 class="work-card-title">Gifting Program</h3>
+            <p class="work-card-blurb">Recipients, preferences, and past gifts held on record.</p>
+          </li>
+          <li class="work-card" data-category="gifts">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-gifts"/></svg>
+            <h3 class="work-card-title">The Holidays</h3>
+            <p class="work-card-blurb">Cards, staff gifting, and hosting planned early enough to be calm.</p>
+          </li>
+          <li class="work-card" data-category="gifts">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-gifts"/></svg>
+            <h3 class="work-card-title">Wedding Weekends</h3>
+            <p class="work-card-blurb">Guest travel, vendors, and the run of show.</p>
+          </li>
+          <li class="work-card" data-category="gifts">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-gifts"/></svg>
+            <h3 class="work-card-title">Event Records</h3>
+            <p class="work-card-blurb">Vendors, costs, and guest details kept so the next one starts from something.</p>
+          </li>
+          <li class="work-card" data-category="gifts">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-gifts"/></svg>
+            <h3 class="work-card-title">Professional Gifting</h3>
+            <p class="work-card-blurb">Client and staff gifts handled with the same care.</p>
+          </li>
+          <li class="work-card" data-category="gifts">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-gifts"/></svg>
+            <h3 class="work-card-title">Hosting Systems</h3>
+            <p class="work-card-blurb">Menus, seating, and the vendors worth reusing.</p>
+          </li>
+          <li class="work-card" data-category="gifts">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-gifts"/></svg>
+            <h3 class="work-card-title">Guest Logistics</h3>
+            <p class="work-card-blurb">Travel, lodging, and arrivals for the people coming to you.</p>
+          </li>
+          <li class="work-card" data-category="research">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-research"/></svg>
+            <h3 class="work-card-title">Decision Briefs</h3>
+            <p class="work-card-blurb">Options researched down to a clear recommendation.</p>
+          </li>
+          <li class="work-card" data-category="research">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-research"/></svg>
+            <h3 class="work-card-title">School Search</h3>
+            <p class="work-card-blurb">Applications, tours, and deadlines managed end to end.</p>
+          </li>
+          <li class="work-card" data-category="research">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-research"/></svg>
+            <h3 class="work-card-title">Vendor Vetting</h3>
+            <p class="work-card-blurb">Contractors and services checked before you commit.</p>
+          </li>
+          <li class="work-card" data-category="research">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-research"/></svg>
+            <h3 class="work-card-title">Venture Research</h3>
+            <p class="work-card-blurb">Market, competitor, and vendor research for a new idea.</p>
+          </li>
+          <li class="work-card" data-category="research">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-research"/></svg>
+            <h3 class="work-card-title">Property Research</h3>
+            <p class="work-card-blurb">Rental and use questions researched, then taken to your advisors.</p>
+          </li>
+          <li class="work-card" data-category="research">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-research"/></svg>
+            <h3 class="work-card-title">Staff Employment</h3>
+            <p class="work-card-blurb">Payroll and classification coordinated with your accountant and attorney.</p>
+          </li>
+          <li class="work-card" data-category="research">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-research"/></svg>
+            <h3 class="work-card-title">Document Architecture</h3>
+            <p class="work-card-blurb">One system per type of information, and everyone knows where.</p>
+          </li>
+          <li class="work-card" data-category="research">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-research"/></svg>
+            <h3 class="work-card-title">Credential Security</h3>
+            <p class="work-card-blurb">Access held properly and never in plain text.</p>
+          </li>
+          <li class="work-card" data-category="research">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-research"/></svg>
+            <h3 class="work-card-title">Major Purchases</h3>
+            <p class="work-card-blurb">Comparison and options prepared before the decision.</p>
+          </li>
+          <li class="work-card" data-category="projects">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-projects"/></svg>
+            <h3 class="work-card-title">Home Purchase</h3>
+            <p class="work-card-blurb">Diligence, inspections, and closing logistics run end to end.</p>
+          </li>
+          <li class="work-card" data-category="projects">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-projects"/></svg>
+            <h3 class="work-card-title">Renovations</h3>
+            <p class="work-card-blurb">Architects, contractors, and trades against one budget and one timeline.</p>
+          </li>
+          <li class="work-card" data-category="projects">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-projects"/></svg>
+            <h3 class="work-card-title">Contractor Oversight</h3>
+            <p class="work-card-blurb">Site meetings attended and subcontractors held to schedule.</p>
+          </li>
+          <li class="work-card" data-category="projects">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-projects"/></svg>
+            <h3 class="work-card-title">Design Coordination</h3>
+            <p class="work-card-blurb">Architects and interior designers working from a single brief.</p>
+          </li>
+          <li class="work-card" data-category="projects">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-projects"/></svg>
+            <h3 class="work-card-title">Plans Reviewed</h3>
+            <p class="work-card-blurb">Drawings checked for storage and for how the house will actually be used.</p>
+          </li>
+          <li class="work-card" data-category="projects">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-projects"/></svg>
+            <h3 class="work-card-title">The Move</h3>
+            <p class="work-card-blurb">Movers, timelines, and the first night in the new house.</p>
+          </li>
+          <li class="work-card" data-category="projects">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-projects"/></svg>
+            <h3 class="work-card-title">Move-In Day</h3>
+            <p class="work-card-blurb">Cleaners, deliveries, and landscapers sequenced to the hour.</p>
+          </li>
+          <li class="work-card" data-category="projects">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-projects"/></svg>
+            <h3 class="work-card-title">New Home Setup</h3>
+            <p class="work-card-blurb">Utilities, services, and security live before you arrive.</p>
+          </li>
+          <li class="work-card" data-category="projects">
+            <svg class="work-card-icon" aria-hidden="true" focusable="false"><use href="#wi-projects"/></svg>
+            <h3 class="work-card-title">Relocation</h3>
+            <p class="work-card-blurb">Schools, doctors, and services established in a new city.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-wordmark">Kaskey Consulting</span>
+      <div class="footer-icons">
+        <a href="https://www.tiktok.com/@elizabethkaskey" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.79 1.52V6.75a4.85 4.85 0 0 1-1.02-.06z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/kaskeyconsulting/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <p class="footer-copy">&#169; 2026 Kaskey Consulting</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            revealObserver.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.07, rootMargin: '0px 0px -36px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+    // Nav shrink on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 56);
+    }, { passive: true });
+
+    // What we run — single-select filtering
+    (() => {
+      const tablist = document.querySelector('[data-work-tabs]');
+      const panel   = document.getElementById('work-panel');
+      if (!tablist || !panel) return;
+
+      const tabs  = Array.from(tablist.querySelectorAll('[role="tab"]'));
+      const cards = Array.from(document.querySelectorAll('.work-card'));
+      let active  = 'all';
+
+      function select(key) {
+        // Clicking the active category, or All, returns to the full view.
+        active = key;
+        let current = null;
+
+        tabs.forEach((tab) => {
+          const on = tab.dataset.filter === key;
+          if (on) current = tab;
+          tab.setAttribute('aria-selected', on ? 'true' : 'false');
+          tab.tabIndex = on ? 0 : -1;
+        });
+
+        cards.forEach((card) => {
+          card.hidden = key !== 'all' && card.dataset.category !== key;
+        });
+
+        if (current) {
+          panel.setAttribute('aria-labelledby', current.id);
+          keepInView(current);
+        }
+      }
+
+      // Scrolls the row itself, never the page, so mobile selection stays put.
+      function keepInView(tab) {
+        if (tablist.scrollWidth <= tablist.clientWidth) return;
+        const pad = 24;
+        const left = tab.offsetLeft;
+        const right = left + tab.offsetWidth;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const behavior = reduce ? 'auto' : 'smooth';
+
+        if (left - pad < tablist.scrollLeft) {
+          tablist.scrollTo({ left: Math.max(0, left - pad), behavior });
+        } else if (right + pad > tablist.scrollLeft + tablist.clientWidth) {
+          tablist.scrollTo({ left: right + pad - tablist.clientWidth, behavior });
+        }
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          select(tab.dataset.filter === active ? 'all' : tab.dataset.filter);
+        });
+      });
+
+      // Roving tabindex. Arrows move focus; Enter and Space select via click.
+      tablist.addEventListener('keydown', (e) => {
+        const i = tabs.indexOf(document.activeElement);
+        if (i === -1) return;
+
+        let next = -1;
+        if (e.key === 'ArrowRight')     next = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home')      next = 0;
+        else if (e.key === 'End')       next = tabs.length - 1;
+        if (next === -1) return;
+
+        e.preventDefault();
+        tabs[next].focus();
+      });
+    })();
+  </script>
+
+</body>
+</html>
