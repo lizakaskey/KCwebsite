@@ -6,6 +6,31 @@
   <title>Kaskey Consulting | A Chief of Staff for Complex Households</title>
   <meta name="description" content="Kaskey Consulting is a fractional Chief of Staff firm providing discreet operational oversight for founders, executives, investors, and high-performing families." />
 
+  <link rel="canonical" href="https://www.kaskeyconsulting.co/" />
+
+  <!-- Open Graph / link previews. Title and description mirror the tags above.
+       Every URL here is absolute: relative URLs are dropped by link unfurlers. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kaskey Consulting" />
+  <meta property="og:url" content="https://www.kaskeyconsulting.co/" />
+  <meta property="og:title" content="Kaskey Consulting | A Chief of Staff for Complex Households" />
+  <meta property="og:description" content="Kaskey Consulting is a fractional Chief of Staff firm providing discreet operational oversight for founders, executives, investors, and high-performing families." />
+  <meta property="og:image" content="https://www.kaskeyconsulting.co/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="The Manhattan skyline seen over the treeline of Central Park." />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kaskey Consulting | A Chief of Staff for Complex Households" />
+  <meta name="twitter:description" content="Kaskey Consulting is a fractional Chief of Staff firm providing discreet operational oversight for founders, executives, investors, and high-performing families." />
+  <meta name="twitter:image" content="https://www.kaskeyconsulting.co/og-image.jpg" />
+  <meta name="twitter:image:alt" content="The Manhattan skyline seen over the treeline of Central Park." />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -68,6 +93,10 @@
 
     /* ── Layout ── */
     .container { max-width: 1160px; margin: 0 auto; padding: 0 2.5rem; }
+    /* <picture> must not form a box, or percentage heights on the inner img
+       would resolve against the wrapper instead of the real parent. */
+    picture { display: contents; }
+
 
     /* ══════════════════════════════════════════════════════
        NAV
@@ -131,6 +160,109 @@
     .nav-cta:active        { background: rgba(245,241,235,0.85); color: var(--forest); }
 
     @media (max-width: 960px) { .nav-links { display: none; } }
+
+    /* ── Mobile menu ──────────────────────────────────────────────────
+       Below 960px .nav-links is hidden, so the toggle and this panel are the
+       only route through the site. The panel is a full-screen --forest field
+       that the bar sits on top of (bar z-index 200, panel 199). Both use the
+       same ground, so they read as one surface — and the bar's padding
+       shrinking on scroll can never open a seam. */
+    .nav-toggle {
+      display: none;
+      margin-left: auto;
+      margin-right: 1.25rem;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: 0;
+      color: var(--cream);
+      cursor: pointer;
+    }
+    .nav-toggle svg { display: block; }
+    .nav-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .nav-toggle .nav-toggle-close { display: none; }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-open  { display: none; }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-close { display: block; }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 199;
+      background: var(--forest);
+      padding: calc(var(--nav-h) + 2rem) 2.5rem 3rem;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                  visibility 0s linear 0.3s;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                  visibility 0s;
+    }
+
+    .mobile-menu-links { list-style: none; }
+    .mobile-menu-links li + li { margin-top: 0.75rem; }
+
+    /* .nav-links type, stepped up for touch. Weight 500 per the dark-ground
+       floor; 44px minimum box with border-box sizing. */
+    .mobile-menu-links a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0.75rem 0;
+      font-family: 'Figtree', sans-serif;
+      font-size: 1.125rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .mobile-menu-links a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .mobile-menu-links a:active        { color: rgba(245,241,235,0.6); }
+
+    /* Inquire keeps the .nav-cta treatment, scaled up for touch. */
+    .mobile-menu-links a.mobile-menu-cta {
+      margin-top: 1.5rem;
+      justify-content: center;
+      color: var(--forest);
+      background: var(--cream);
+      border: 1px solid var(--cream);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      padding: 0.9rem 1.5rem;
+    }
+    .mobile-menu-links a.mobile-menu-cta:active {
+      color: var(--forest);
+      background: rgba(245,241,235,0.85);
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    @media (max-width: 960px) {
+      .nav-toggle { display: inline-flex; }
+      /* The panel carries its own Inquire, so the bar's copy steps aside while
+         open. visibility keeps its box, so the toggle does not shift. */
+      body.menu-open .nav-cta { visibility: hidden; }
+    }
+
+    /* The panel can never open above the breakpoint, but keep it inert there. */
+    @media (min-width: 961px) { .mobile-menu { display: none; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mobile-menu,
+      .mobile-menu.open { transition: none; transform: none; }
+    }
 
     /* ══════════════════════════════════════════════════════
        HERO
@@ -218,6 +350,19 @@
       animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
     }
 
+    /* Scarcity line. The 0.64 scrim plateau above was set for this line. */
+    .hero-note {
+      font-family: 'Figtree', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(245,241,235,0.86);
+      line-height: 1.55;
+      max-width: 52ch;
+      margin-top: 0.75rem;
+      text-shadow: 0 1px 10px rgba(43,43,43,0.55);
+      animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.31s both;
+    }
+
     /* .nav-cta treatment scaled up, outlined rather than filled. */
     .hero-cta {
       display: inline-block;
@@ -268,6 +413,19 @@
       color: var(--cream);
       max-width: 1400px;
       margin: 0 auto;
+    }
+
+    /* Second line sits tight under the first so the pair reads as one unit.
+       Cream at 0.72 over --espresso measures 6.9:1; --gold would be 5.5:1. */
+    .thesis-sub {
+      font-family: 'Figtree', sans-serif;
+      font-size: clamp(1rem, 1.4vw, 1.1875rem);
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1.55;
+      color: rgba(245,241,235,0.72);
+      max-width: 68ch;
+      margin: 0.75rem auto 0;
     }
 
     @media (max-width: 600px) {
@@ -361,7 +519,7 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      width: clamp(3rem, 8vw, 9rem);
+      width: min(calc(50% - 2rem), 19rem);
       z-index: 2;
       pointer-events: none;
     }
@@ -437,8 +595,13 @@
     .work-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
     .work-more:active        { background: var(--espresso); border-color: var(--espresso); color: var(--cream); }
 
+    /* Below 600px a strict no-clipping fade would need ~206px a side, leaving
+       almost no clear centre. Trade a little clipping for readable items:
+       120px a side keeps roughly half the viewport fully legible. */
     @media (max-width: 600px) {
-      .work-marquee-item { padding: 1rem 1.5rem; }
+      .work-marquee-item { padding: 0.875rem 1rem; font-size: 1rem; }
+      .work-marquee::before,
+      .work-marquee::after { width: 7.5rem; }
     }
     @media (max-width: 600px) {
       .work-inner { padding: 0 1.25rem; }
@@ -450,59 +613,11 @@
     #approach {
       background: #1a1a1a;
       padding: 3.75rem 0;
+      scroll-margin-top: var(--nav-h);
     }
-    .approach-inner {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 2.5rem;
-    }
-    .approach-label {
-      font-family: 'Figtree', sans-serif;
-      font-size: 0.6875rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 500;
-      color: rgba(192,169,122,0.6);
-      display: block;
-      margin-bottom: 1.25rem;
-    }
-    .approach-headline {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.875rem, 3.5vw, 2.75rem);
-      font-weight: 500;
-      letter-spacing: -0.025em;
-      line-height: 1.15;
-      color: var(--cream);
-      margin-bottom: 2rem;
-    }
-    .approach-body {
-      font-family: 'Figtree', sans-serif;
-      font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
-      color: rgba(245,241,235,0.80);
-      line-height: 1.78;
-      max-width: 75ch;
-    }
-    .approach-body + .approach-body { margin-top: 1.25rem; }
-    .approach-note {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic;
-      font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
-      color: var(--gold);
-      line-height: 1.7;
-      max-width: 75ch;
-      margin-top: 1.75rem;
-    }
-    @media (max-width: 600px) {
-      .approach-inner { padding: 0 1.25rem; }
-    }
-
     /* ══════════════════════════════════════════════════════
        ENGAGEMENT
     ══════════════════════════════════════════════════════ */
-    #engagement {
-      background: var(--cream);
-      padding: 3.75rem 0;
-    }
     .engagement-inner {
       max-width: 1160px;
       margin: 0 auto;
@@ -591,9 +706,6 @@
       border-top: 1px solid rgba(192,169,122,0.35);
       background: rgba(255,255,255,0.04);
     }
-    .principle + .principle {
-    }
-
     .principle-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.5rem;
@@ -615,8 +727,6 @@
 
     @media (max-width: 768px) {
       .principles-grid { grid-template-columns: 1fr; }
-      .principle + .principle {
-      }
       .principle { padding: 2rem; }
     }
 
@@ -626,6 +736,7 @@
     #about {
       background: var(--cream);
       padding: var(--sp-xl) 0;
+      scroll-margin-top: var(--nav-h);
     }
 
     .founder-grid {
@@ -637,6 +748,9 @@
 
     .founder-img-wrap img {
       width: 100%;
+      /* The height attribute is a presentational hint; without this it would
+         beat aspect-ratio and render the image at its full intrinsic height. */
+      height: auto;
       display: block;
       object-fit: cover;
       aspect-ratio: 3/4;
@@ -689,6 +803,7 @@
     #contact {
       background: var(--cream);
       padding: var(--sp-xl) 0;
+      scroll-margin-top: var(--nav-h);
     }
 
 
@@ -754,7 +869,7 @@
     .btn-submit {
       margin-top: 2rem;
       font-family: 'Figtree', sans-serif;
-      font-size: 0.8125rem;
+      font-size: 1rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       font-weight: 600;
@@ -821,6 +936,65 @@
     .form-error-banner.visible { display: block; }
 
     /* ══════════════════════════════════════════════════════
+       FOLLOW ALONG
+       Instagram's embed.js owns everything inside the cards, so the section
+       around them carries the whole treatment. Linen separates the row from
+       #contact (cream) above and the espresso footer below.
+    ══════════════════════════════════════════════════════ */
+    #follow {
+      background: var(--linen);
+      padding: var(--sp-lg) 0;
+      scroll-margin-top: var(--nav-h);
+    }
+
+    /* One body-size line, left on the container. Deliberately not a headline. */
+    .follow-handle {
+      font-size: 1.125rem;
+      line-height: 1.65;
+      font-weight: 400;
+      color: rgba(43,43,43,0.72);
+      margin: 0;
+    }
+    /* Inline-link treatment matching .form-direct-email a. */
+    .follow-handle a {
+      color: var(--espresso);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    .follow-handle a:hover         { color: var(--chestnut); }
+    .follow-handle a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .follow-handle a:active        { color: var(--charcoal); }
+
+    /* Three cards at Instagram's 326px floor plus two 2rem gaps is 1042px,
+       inside the 1080px the 1160px container leaves. Below that they stack.
+       justify-items does the centring: the embed carries an inline margin,
+       so auto margins on the item would not win. */
+    .follow-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      align-items: start;
+      justify-items: center;
+      margin: 1.75rem 0 0;
+    }
+
+    /* No embeds pasted in yet, or the markup was pulled: collapse the row so
+       the handle line closes up instead of framing a hole. */
+    .follow-grid.is-empty { display: none; }
+
+    @media (max-width: 1160px) {
+      .follow-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* Container padding drops to 1.25rem here, which leaves 320px at a 360px
+       viewport — under Instagram's 326px floor. Pull the row out to its own
+       edge so the cards never push the page sideways. */
+    @media (max-width: 600px) {
+      .follow-grid { margin: 1.5rem -0.5rem 0; }
+    }
+
+    /* ══════════════════════════════════════════════════════
        FOOTER
     ══════════════════════════════════════════════════════ */
     footer {
@@ -883,31 +1057,63 @@
   <!-- ═══════════════════ NAV ═══════════════════ -->
   <nav class="nav" id="nav" role="navigation" aria-label="Main">
     <a href="#" class="nav-logo" aria-label="Kaskey Consulting, home">
-      <img src="3.png" alt="Kaskey Consulting" />
+      <picture>
+        <source srcset="nav-logo.webp" type="image/webp" />
+        <img src="nav-logo.png" alt="Kaskey Consulting" width="360" height="60" />
+      </picture>
     </a>
     <ul class="nav-links" role="list">
       <li><a href="work.html">The Work</a></li>
       <li><a href="#approach">Approach</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#follow">Follow along</a></li>
     </ul>
+    <button class="nav-toggle" id="nav-toggle" type="button"
+            aria-expanded="false" aria-controls="mobile-menu"
+            aria-label="Open navigation menu">
+      <svg class="nav-toggle-open" width="24" height="14" viewBox="0 0 24 14" fill="none"
+           stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+        <path d="M0 1h24M0 7h24M0 13h24" />
+      </svg>
+      <svg class="nav-toggle-close" width="20" height="20" viewBox="0 0 20 20" fill="none"
+           stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+        <path d="M1 1l18 18M19 1L1 19" />
+      </svg>
+    </button>
     <a href="#contact" class="nav-cta">Inquire</a>
+  </nav>
+
+  <!-- Mobile menu. Mirrors .nav-links plus Inquire; sits under the bar. -->
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+    <ul class="mobile-menu-links" role="list">
+      <li><a href="work.html">The Work</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#follow">Follow along</a></li>
+      <li><a href="#contact" class="mobile-menu-cta">Inquire</a></li>
+    </ul>
   </nav>
 
   <!-- ═══════════════════ HERO ═══════════════════ -->
   <section id="hero" aria-label="Introduction">
     <div class="hero-bg" aria-hidden="true">
-      <img src="IMG_1831_VSCO.JPG" alt="" />
+      <picture>
+        <source srcset="hero.webp" type="image/webp" />
+        <img src="IMG_1831_VSCO.JPG" alt="" width="1535" height="2722" />
+      </picture>
     </div>
     <div class="hero-inner">
       <h1 class="hero-headline">A Chief of Staff for complex households.</h1>
       <p class="hero-sub">Operational oversight for founders, executives, and high-performing families whose lives have outgrown fragmented systems.</p>
+      <p class="hero-note">Private practice. Limited engagements by referral and application.</p>
       <a href="#contact" class="hero-cta">Inquire now</a>
     </div>
   </section>
 
   <!-- ═══════════════════ THESIS ═══════════════════ -->
   <section id="thesis" aria-label="The operational layer">
-    <h2 class="thesis-headline reveal">Kaskey Consulting provides the operational layer most households are missing</h2>
+    <h2 class="thesis-headline reveal">Households don't lack resources. They lack architecture.</h2>
+    <p class="thesis-sub reveal reveal-d1">Kaskey Consulting builds the architecture, then runs it.</p>
   </section>
 
   <!-- ═══════════════════ WHAT WE RUN ═══════════════════ -->
@@ -1012,7 +1218,10 @@
 
         <div class="reveal">
           <div class="founder-img-wrap">
-            <img src="IMG_1835.JPG" alt="Liza Kaskey, Founder of Kaskey Consulting" />
+            <picture>
+              <source srcset="founder.webp" type="image/webp" />
+              <img src="founder.jpg" alt="Liza Kaskey, Founder of Kaskey Consulting" width="1210" height="2146" loading="lazy" />
+            </picture>
           </div>
           <span class="founder-caption">Liza Kaskey, Founder</span>
         </div>
@@ -1076,9 +1285,28 @@
       </div><!-- /form col -->
 
       <div class="inquiry-img-col reveal reveal-d1">
-        <img src="IMG_1833.JPG" alt="" />
+        <picture>
+          <source srcset="inquiry.webp" type="image/webp" />
+          <img src="inquiry.jpg" alt="" width="1000" height="1774" loading="lazy" />
+        </picture>
       </div>
     </div><!-- /inquiry-2col -->
+  </section>
+
+  <!-- ═══════════════════ FOLLOW ALONG ═══════════════════ -->
+  <section id="follow" aria-label="Follow along">
+    <div class="container">
+      <p class="follow-handle reveal">Follow along: <a href="https://www.instagram.com/kaskeyconsulting/" target="_blank" rel="noopener noreferrer">@kaskeyconsulting</a></p>
+
+      <div class="follow-grid">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DcBvSVTkSm-/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/DcBvSVTkSm-/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/DcBvSVTkSm-/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Kaskey Consulting (@kaskeyconsulting)</a></p></div></blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZAreBzR_hY/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DZAreBzR_hY/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DZAreBzR_hY/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Kaskey Consulting (@kaskeyconsulting)</a></p></div></blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZfrynFCY9b/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/DZfrynFCY9b/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/DZfrynFCY9b/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Kaskey Consulting (@kaskeyconsulting)</a></p></div></blockquote>
+      </div>
+
+    </div>
   </section>
 
   <!-- ═══════════════════ FOOTER ═══════════════════ -->
@@ -1179,6 +1407,117 @@
         document.getElementById('fg-' + id).classList.remove('has-error');
       });
     });
+  </script>
+
+  <script>
+    // ── Follow Along: Instagram embeds ──
+    // embed.js is heavy and the section sits well below the fold, so it is
+    // fetched once, and only when the section comes within a screen of the
+    // viewport. Nothing above the fold waits on it.
+    (function () {
+      var section = document.getElementById('follow');
+      if (!section) return;
+
+      var grid = section.querySelector('.follow-grid');
+
+      // No embeds pasted in yet: collapse the row so the eyebrow, headline,
+      // subhead and link still read as a finished section, and skip the fetch.
+      if (!grid || !grid.querySelector('blockquote.instagram-media')) {
+        if (grid) grid.classList.add('is-empty');
+        return;
+      }
+
+      var requested = false;
+      function loadEmbeds() {
+        if (requested) return;
+        requested = true;
+
+        // Script already on the page (pasted snippet, earlier call): just
+        // re-run the processor rather than fetching a second copy.
+        if (window.instgrm && window.instgrm.Embeds) {
+          window.instgrm.Embeds.process();
+          return;
+        }
+        if (document.querySelector('script[src*="instagram.com/embed.js"]')) return;
+
+        var s = document.createElement('script');
+        s.src   = 'https://www.instagram.com/embed.js';
+        s.async = true;
+        document.body.appendChild(s);
+      }
+
+      if (!('IntersectionObserver' in window)) { loadEmbeds(); return; }
+
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) { loadEmbeds(); io.disconnect(); return; }
+        }
+      }, { rootMargin: '600px 0px' });
+
+      io.observe(section);
+    })();
+  </script>
+
+  <script>
+    // ── Mobile menu ──
+    // Below 960px this panel is the only navigation, so it owns focus while
+    // open: focus moves in, is trapped, and returns to the toggle on close.
+    (function () {
+      var toggle = document.getElementById('nav-toggle');
+      var panel  = document.getElementById('mobile-menu');
+      if (!toggle || !panel) return;
+
+      var FOCUSABLE = 'a[href], button:not([disabled])';
+      var isOpen = function () { return panel.classList.contains('open'); };
+
+      function openMenu() {
+        panel.classList.add('open');
+        document.body.classList.add('menu-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Close navigation menu');
+        var first = panel.querySelector(FOCUSABLE);
+        if (first) first.focus();
+        document.addEventListener('keydown', onKeydown);
+      }
+
+      // returnFocus is skipped when a link was tapped: the page is navigating
+      // or scrolling to an anchor, and pulling focus back would fight it.
+      function closeMenu(returnFocus) {
+        panel.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
+        document.removeEventListener('keydown', onKeydown);
+        if (returnFocus !== false) toggle.focus();
+      }
+
+      function onKeydown(e) {
+        if (e.key === 'Escape') { e.preventDefault(); closeMenu(); return; }
+        if (e.key !== 'Tab') return;
+        var items = Array.prototype.filter.call(
+          panel.querySelectorAll(FOCUSABLE),
+          function (el) { return el.offsetParent !== null; }
+        );
+        if (!items.length) return;
+        var first = items[0], last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+
+      toggle.addEventListener('click', function () {
+        if (isOpen()) { closeMenu(); } else { openMenu(); }
+      });
+
+      panel.addEventListener('click', function (e) {
+        if (e.target.closest('a')) closeMenu(false);
+      });
+
+      // Rotating past the breakpoint would otherwise strand an open panel
+      // behind a toggle that is no longer displayed.
+      window.addEventListener('resize', function () {
+        if (isOpen() && window.innerWidth > 960) closeMenu(false);
+      });
+    })();
   </script>
 
 </body>

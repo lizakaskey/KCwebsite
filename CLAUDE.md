@@ -10,7 +10,7 @@
 
 A custom marketing website for **Kaskey Consulting**, a fractional Chief of Staff service for high-net-worth, time-starved families. The founder is Liza Kaskey, who comes from an investment banking background. This is not a household help service — it is operational partnership at the family level.
 
-The website replaces an existing Squarespace site at **kaskeyconsulting.co**. When complete, the single HTML file will be deployed to Netlify via drag and drop — no build steps, no dependencies, no local server required.
+The website replaces an existing Squarespace site at **kaskeyconsulting.co**. It deploys to **Vercel** — no build steps, no dependencies, no local server required. (This previously said Netlify; the site deploys to Vercel.)
 
 ---
 
@@ -119,7 +119,7 @@ Define all colors as CSS variables at the top of every file. Never use default T
 - All brand colors defined as CSS variables — never hardcoded inline
 - Placeholder images via `https://placehold.co/WIDTHxHEIGHT` only where real assets don't exist
 - Mobile-first responsive — most traffic will arrive from TikTok on phones
-- Design for Netlify drag-and-drop deployment — zero build steps, zero dependencies
+- Design for static deployment on Vercel — zero build steps, zero dependencies
 - One clear CTA throughout: "Work with me" or "Inquire" — consistent, never pushy
 - When in doubt, do less. Restraint is the aesthetic.
 
