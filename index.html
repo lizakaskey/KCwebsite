@@ -423,32 +423,20 @@
     /* ══════════════════════════════════════════════════════
        INQUIRY 2-COLUMN
     ══════════════════════════════════════════════════════ */
+    /* 40/1fr with a 5rem gutter, mirroring .founder-grid: 432px of copy beside
+       568px of form at 1440, so the fields are the wider half. */
     .inquiry-2col {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 40% 1fr;
       gap: 5rem;
       align-items: start;
       max-width: 1160px;
       margin: 0 auto;
       padding: 0 2.5rem;
     }
-    .inquiry-img-col img {
-      width: 100%;
-      height: 100%;
-      min-height: 500px;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      filter: saturate(0.82) brightness(0.97);
-    }
 
     @media (max-width: 840px) {
-      .inquiry-2col {
-        grid-template-columns: 1fr;
-        gap: 0;
-        padding: 0 1.25rem;
-      }
-      .inquiry-img-col { display: none; }
+      .inquiry-2col { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.25rem; }
     }
 
     /* ══════════════════════════════════════════════════════
@@ -630,24 +618,69 @@
       color: var(--cream);
       margin-bottom: 2rem;
     }
-    .engagement-body {
+    /* Step ledger. Three columns on a dark ground: number, title, one line of
+       copy, divided by gold hairlines at low alpha so the rules read as ruling
+       rather than as a table border. */
+    .steps {
+      list-style: none;
+      margin-top: 2.5rem;
+      border-bottom: 1px solid rgba(192,169,122,0.22);
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 3.5rem 15rem 1fr;
+      gap: 0 2rem;
+      align-items: baseline;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(192,169,122,0.22);
+    }
+    /* No monospace is loaded, so the number takes the eyebrow treatment.
+       tabular-nums keeps the column from shifting between figures. */
+    .step-num {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.8125rem;
+      letter-spacing: 0.18em;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      color: rgba(245,241,235,0.55);
+    }
+    /* Title-case in the markup, uppercased here, so screen readers do not
+       spell it out letter by letter. */
+    .step-title {
+      font-family: 'Figtree', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--cream);
+    }
+    .step-body {
+      font-family: 'Figtree', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 500;
+      line-height: 1.65;
+      color: rgba(245,241,235,0.78);
       max-width: 68ch;
     }
-    .engagement-body p {
-      font-family: 'Figtree', sans-serif;
-      font-size: clamp(1.125rem, 1.6vw, 1.25rem);
-      color: rgba(245,241,235,0.80);
-      line-height: 1.65;
-      font-weight: 500;
+
+    /* Below tablet the number keeps its column and the title sits beside it,
+       with the copy dropping underneath, indented to the title. The numbers
+       stay a scannable left column instead of becoming a stacked heading. */
+    @media (max-width: 840px) {
+      .step {
+        grid-template-columns: 3.5rem 1fr;
+        gap: 0.5rem 1rem;
+      }
+      .step-body { grid-column: 2 / -1; }
     }
-    .engagement-body p + p { margin-top: 1.25rem; }
     .engagement-closing {
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-size: clamp(1rem, 1.3vw, 1.0625rem);
       color: var(--taupe);
       line-height: 1.55;
-      margin-top: 2.25rem !important;
+      margin-top: 2.25rem;
       font-weight: 500;
     }
     @media (max-width: 600px) {
@@ -655,84 +688,13 @@
     }
 
     /* ══════════════════════════════════════════════════════
-       PRINCIPLES
-    ══════════════════════════════════════════════════════ */
-    #principles {
-      background: var(--forest);
-      padding: 3.75rem 0;
-    }
-
-    /* Cream, not gold: gold on --forest is 4.10:1 and fails AA, and with gold
-       now used as a block fill below, a gold label reads as an echo of the
-       blocks rather than a heading for them. Cream is 8.31:1. This stands
-       whether or not the gold-block experiment is reverted. */
-    .principles-label {
-      font-family: 'Figtree', sans-serif;
-      font-size: 0.8125rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 500;
-      color: var(--cream);
-      display: block;
-      margin-bottom: 1.25rem;
-    }
-
-    .principles-headline {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.875rem, 3.5vw, 2.75rem);
-      font-weight: 500;
-      letter-spacing: -0.025em;
-      line-height: 1.15;
-      color: var(--cream);
-      margin-bottom: 2.25rem;
-    }
-
-    .principles-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-    }
-
-    /* EXPERIMENT - gold blocks. One-line revert: padding: 2.5rem; border-top:
-       1px solid rgba(192,169,122,0.35); background: rgba(255,255,255,0.04); */
-    .principle {
-      padding: 2rem;
-      border-top: 1px solid rgba(43,43,43,0.18);
-      background: var(--gold);
-    }
-    .principle-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.5rem;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      /* EXPERIMENT - revert: color: var(--gold); */
-      color: var(--charcoal);
-      margin-bottom: 1rem;
-    }
-
-    .principle-body {
-      font-family: 'Figtree', sans-serif;
-      font-size: 1.0625rem;
-      /* EXPERIMENT - revert: color: rgba(245,241,235,0.70);
-         Full charcoal, not 0.72 alpha: 0.72 over gold is 3.6:1 and fails AA. */
-      color: var(--charcoal);
-      line-height: 1.65;
-      font-weight: 500;
-      max-width: 46ch;
-    }
-
-    @media (max-width: 768px) {
-      .principles-grid { grid-template-columns: 1fr; }
-      .principle { padding: 2rem; }
-    }
-
-    /* ══════════════════════════════════════════════════════
        FOUNDER
     ══════════════════════════════════════════════════════ */
+    /* Bottom pad trimmed: #contact below is the same cream, so there is no
+       colour change to justify a full section frame on both sides. */
     #about {
       background: var(--cream);
-      padding: var(--sp-xl) 0;
+      padding: var(--sp-xl) 0 var(--sp-lg);
       scroll-margin-top: var(--nav-h);
     }
 
@@ -799,7 +761,7 @@
     ══════════════════════════════════════════════════════ */
     #contact {
       background: var(--cream);
-      padding: var(--sp-xl) 0;
+      padding: var(--sp-lg) 0 var(--sp-xl);
       scroll-margin-top: var(--nav-h);
     }
 
@@ -818,7 +780,7 @@
       font-size: 1.125rem;
       color: var(--taupe);
       line-height: 1.65;
-      margin-bottom: 3rem;
+      margin-bottom: 0;
       max-width: 68ch;
     }
 
@@ -870,15 +832,18 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       font-weight: 600;
-      color: var(--cream);
-      background: var(--forest);
+      /* Outline treatment, matching .work-more and .hero-cta. Forest on cream
+         is 8.31:1; the filled hover state is cream on forest, the same ratio. */
+      color: var(--forest);
+      background: transparent;
       border: 1px solid var(--forest);
-      padding: 0.875rem 2.25rem;
+      padding: 1.125rem 2.75rem;
       cursor: pointer;
       transition: background 0.22s cubic-bezier(0.22, 1, 0.36, 1),
                   color 0.22s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .btn-submit:hover         { background: transparent; color: var(--forest); }
+    .btn-submit:hover         { background: var(--forest); color: var(--cream); }
+    .btn-submit:active        { background: var(--espresso); border-color: var(--espresso); color: var(--cream); }
     .btn-submit:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
     .form-direct-email {
@@ -1218,33 +1183,34 @@
     <div class="engagement-inner">
       <span class="engagement-label reveal">OUR APPROACH</span>
       <h2 class="engagement-headline reveal reveal-d1">Foundation, then partnership</h2>
-      <div class="engagement-body">
-        <p class="reveal reveal-d2">Every engagement begins with a foundation period that is focused, intensive, and tailored to the household. We map the operating picture, build the systems, and establish the rhythms that will run the partnership forward.</p>
-        <p class="reveal reveal-d2">From there, the work transitions into an ongoing partnership. Communication is async by design. We meet on a cadence that fits you.</p>
-        <p class="engagement-closing reveal reveal-d3">Engagements are scoped individually. Pricing and structure are shared during the discovery call.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ PRINCIPLES ═══════════════════ -->
-  <section id="principles" aria-label="Our principles">
-    <div class="container">
-      <span class="principles-label reveal">HOW WE OPERATE</span>
-      <h2 class="principles-headline reveal reveal-d1">Principles</h2>
-      <div class="principles-grid">
-        <div class="principle reveal">
-          <h3 class="principle-title">Discretion</h3>
-          <p class="principle-body">We operate inside highly personal environments with the professionalism, judgment, and confidentiality expected in high-trust advisory roles.</p>
-        </div>
-        <div class="principle reveal reveal-d1">
-          <h3 class="principle-title">Ownership</h3>
-          <p class="principle-body">We take responsibility for outcomes, not just coordination, proactively managing details, dependencies, and follow-through across the household.</p>
-        </div>
-        <div class="principle reveal reveal-d2">
-          <h3 class="principle-title">Continuity</h3>
-          <p class="principle-body">We build systems that hold as life evolves, reducing friction, rework, and the mental burden of constantly keeping everything in motion.</p>
-        </div>
-      </div>
+      <ol class="steps reveal reveal-d2">
+        <li class="step">
+          <span class="step-num" aria-hidden="true">01</span>
+          <h3 class="step-title">The discovery call</h3>
+          <p class="step-body">We talk through how your household runs today, what takes up your time, and where support would make the biggest difference.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">02</span>
+          <h3 class="step-title">The kickoff</h3>
+          <p class="step-body">We map the full picture: your family, properties, vendors, routines, priorities, and what's coming up.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">03</span>
+          <h3 class="step-title">The foundation</h3>
+          <p class="step-body">We centralize key information and build the systems for vendors, recurring needs, tasks, decisions, and follow-through.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">04</span>
+          <h3 class="step-title">The activation</h3>
+          <p class="step-body">We put the systems to work, take ownership of priorities, and establish how we'll work together day to day.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">05</span>
+          <h3 class="step-title">The partnership</h3>
+          <p class="step-body">We manage the ongoing work, own projects, and stay ahead of what's coming next.</p>
+        </li>
+      </ol>
+      <p class="engagement-closing reveal reveal-d3">Engagements are scoped individually. Pricing and structure are shared during the discovery call.</p>
     </div>
   </section>
 
@@ -1279,9 +1245,12 @@
   <!-- ═══════════════════ INQUIRY ═══════════════════ -->
   <section id="contact" aria-label="Private inquiry">
     <div class="inquiry-2col">
-      <div>
-      <h2 class="contact-headline reveal">Private inquiry</h2>
-      <p class="contact-body reveal reveal-d1">We intentionally work with a limited number of families at any given time. To begin the conversation, please share a bit about your household and what prompted your inquiry.</p>
+      <div class="inquiry-intro">
+        <h2 class="contact-headline reveal">Private inquiry</h2>
+        <p class="contact-body reveal reveal-d1">We intentionally work with a limited number of families at any given time. To begin the conversation, please share a bit about your household and what prompted your inquiry.</p>
+      </div><!-- /intro col -->
+
+      <div class="inquiry-form-col">
 
       <form
         id="inquire-form"
@@ -1303,9 +1272,9 @@
         </div>
 
         <div class="form-group" id="fg-household">
-          <label for="household">Tell me about your household</label>
+          <label for="household">Tell us about your household</label>
           <textarea id="household" name="household" rows="4" placeholder="What's feeling unmanaged?"></textarea>
-          <span class="form-field-error">Please tell me a bit about your household.</span>
+          <span class="form-field-error">Please tell us a bit about your household.</span>
         </div>
 
         <button type="submit" class="btn-submit" id="submit-btn">Send inquiry</button>
@@ -1321,12 +1290,6 @@
       </div>
       </div><!-- /form col -->
 
-      <div class="inquiry-img-col reveal reveal-d1">
-        <picture>
-          <source srcset="inquiry.webp" type="image/webp" />
-          <img src="inquiry.jpg" alt="" width="1000" height="1774" loading="lazy" />
-        </picture>
-      </div>
     </div><!-- /inquiry-2col -->
   </section>
 
